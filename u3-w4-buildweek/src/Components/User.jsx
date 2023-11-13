@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { Bell, BellFill, Dice1, Plus, PlusLg, Trash, VolumeUpFill } from "react-bootstrap-icons";
+import { Bell,  PlusLg,  VolumeUpFill } from "react-bootstrap-icons";
+import {useDispatch, useSelector} from "react-redux"
+import { fetchUser } from "../Redux/actions/fetchUser";
 
 const User = function () {
 
@@ -34,6 +36,18 @@ const User = function () {
         showProfile()
     },[])
     
+// const dispatch = useDispatch()
+// const userData = useSelector((state)=>state.user.userData)
+
+// useEffect (()=>{
+//     dispatch(fetchUser())
+// },[dispatch])
+
+// if (!userData) {
+//     // Se userData è ancora undefined, puoi renderizzare un loader o un messaggio di caricamento
+//     return <div>Loading...</div>;
+//   }
+
     return (
         <>
         {userData && (
