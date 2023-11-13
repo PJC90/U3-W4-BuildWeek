@@ -1,0 +1,14 @@
+.titol:hover {
+  text-decoration: underline !important;
+  color: lightskyblue !important;
+}
+
+.mostra:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.bottone:hover {
+  background-color: rgb(223, 223, 223) !important;
+  border: 1.8px solid black !important;
+}
