@@ -18,7 +18,7 @@ const Home = function () {
         </Row>
         </Container>
         <Row>
-            <Col md={2} className="ms-auto me-5">
+            <Col xs={7} md={5} lg={4} className="ms-auto me-5">
             <Chat/>
             </Col>
         </Row>
