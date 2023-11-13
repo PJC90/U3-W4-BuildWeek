@@ -1,7 +1,8 @@
 import './App.css'
+import Home from './Components/Home'
 
 function App() {
-  return <h2>PER PROVAb</h2>
+  return <Home />
 }
 
 export default App
