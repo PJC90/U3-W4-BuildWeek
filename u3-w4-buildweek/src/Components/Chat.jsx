@@ -1,36 +1,24 @@
+import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+
 const Chat = function () {
     return (
         <>
-        <h2>Chat</h2>
-            <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Ex impedit labore repellat doloribus hic? Porro nesciunt, 
-            similique quia qui, accusamus dolore deleniti alias debitis cupiditate, 
-            consequuntur obcaecati iusto architecto! Fugiat!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Ex impedit labore repellat doloribus hic? Porro nesciunt, 
-            similique quia qui, accusamus dolore deleniti alias debitis cupiditate, 
-            consequuntur obcaecati iusto architecto! Fugiat!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Ex impedit labore repellat doloribus hic? Porro nesciunt, 
-            similique quia qui, accusamus dolore deleniti alias debitis cupiditate, 
-            consequuntur obcaecati iusto architecto! Fugiat!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Ex impedit labore repellat doloribus hic? Porro nesciunt, 
-            similique quia qui, accusamus dolore deleniti alias debitis cupiditate, 
-            consequuntur obcaecati iusto architecto! Fugiat!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Ex impedit labore repellat doloribus hic? Porro nesciunt, 
-            similique quia qui, accusamus dolore deleniti alias debitis cupiditate, 
-            consequuntur obcaecati iusto architecto! Fugiat!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Ex impedit labore repellat doloribus hic? Porro nesciunt, 
-            similique quia qui, accusamus dolore deleniti alias debitis cupiditate, 
-            consequuntur obcaecati iusto architecto! Fugiat!
-            </p>
+            <ListGroup>
+                <ListGroup.Item>Messaggistica</ListGroup.Item>
+                <ListGroup.Item>
+                <Form>
+                    <Form.Group className="mb-3">
+                        <Form.Control type="text" placeholder="Cerca messaggi" />
+                    </Form.Group>
+                </Form>
+
+                </ListGroup.Item>
+            </ListGroup>
         </>
 
     )
-  };
-  
-  export default Chat;
+};
+
+export default Chat;
