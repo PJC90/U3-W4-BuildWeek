@@ -63,7 +63,7 @@ const User = function () {
               <Col className="d-none d-lg-block" lg={4}>
                 {allExperiences.slice(0, 2).map((experience) => (
                   <div
-                    key={experience._key}
+                    key={experience._id}
                     className="d-lg-flex align-items-center gap-2 pb-2"
                   >
                     <Col lg={2}>
