@@ -6,19 +6,44 @@ import { PencilSquare } from 'react-bootstrap-icons';
 import { CaretDown } from 'react-bootstrap-icons';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CaretUp } from 'react-bootstrap-icons';
-
 
 const Chat = function () {
 
     const [isChatClosed, setIsChatClosed] = useState(true)
+    const [users, setUsers] = useState([])
 
     const toggleChat = () => {
         setIsChatClosed(!isChatClosed)
     }
 
-    // className='position-fixed bottom-0 end-0'
+
+    const getUsers = () => {
+        fetch('https://striveschool-api.herokuapp.com/api/profile/', {
+            headers: {
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUzNzNhM2RkOTllZjAwMTlhMDkzNjMiLCJpYXQiOjE2OTk5Njc5MDcsImV4cCI6MTcwMTE3NzUwN30.Q9zdWfrH_WggJv79ncIGKAEjK9TE7rEwev5YbbTRJAU"
+            }
+        })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error('Network response was not ok.');
+            }
+        })
+        .then((data) => {
+            console.log(data);
+            setUsers(data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
+    useEffect(() => {
+        getUsers()
+    }, [])
 
     return (
         <Container>
@@ -49,37 +74,27 @@ const Chat = function () {
                                 <>
                                     <Form>
                                         <Form.Group className="mb-3">
-                                            {/* <span><Search /></span> */}
                                             <Form.Control type="text" placeholder='Cerca messaggi' className="searchchat-bg" style={{backgroundColor: '#bed6ff'}}/>
                                         </Form.Group>
                                     </Form>
-                                    <Container>
-                                        <Row className='align-items-center mt-3 pb-2 border-bottom'>
-                                            <Col className='col-4 p-0'>
-                                                <img src="http://placekitten.com/100" alt="profile" className='rounded-circle w-75' />
-                                            </Col>
-                                            <Col className='ms-1 p-0' style={{fontSize: '0.9em', maxWidth: '60%'}}>
-                                                <div className='d-flex justify-content-between'>
-                                                <p className='m-0'><strong>Nome utente</strong></p>
-                                                <p className='m-0'><strong>15:32</strong></p>
-                                                </div>
-                                                <p className='m-0'>Offerta lavoro</p>
-                                                <p className='m-0 text-truncate' style={{maxWidth: '40%'}}>Descrizione lavoroooooooooo</p>
-                                            </Col>
-                                        </Row>
-                                        <Row className='align-items-center mt-3 pb-2 border-bottom'>
-                                            <Col className='col-4 p-0'>
-                                                <img src="http://placekitten.com/100" alt="profile" className='rounded-circle w-75' />
-                                            </Col>
-                                            <Col className='ms-1 p-0' style={{fontSize: '0.9em', maxWidth: '60%'}}>
-                                                <div className='d-flex justify-content-between'>
-                                                <p className='m-0'><strong>Nome utente</strong></p>
-                                                <p className='m-0'><strong>15:32</strong></p>
-                                                </div>
-                                                <p className='m-0'>Offerta lavoro</p>
-                                                <p className='m-0 text-truncate' style={{maxWidth: '40%'}}>Descrizione lavoroooooooooo</p>
-                                            </Col>
-                                        </Row>
+                                    <Container style={{maxHeight: 400, overflow: 'auto'}}>
+                                        {users.map((utente) => {
+                                            return (
+                                                <Row className='align-items-center mt-3 pb-2 border-bottom'>
+                                                <Col className='col-4 p-0'>
+                                                    <img src={utente.image} alt="profile" className='rounded-circle w-75' />
+                                                </Col>
+                                                <Col className='ms-1 p-0' style={{fontSize: '0.9em', maxWidth: '60%'}}>
+                                                    <div className='d-flex justify-content-between'>
+                                                    <p className='m-0'><strong>{utente.name}</strong></p>
+                                                    <p className='m-0'><strong>15:32</strong></p>
+                                                    </div>
+                                                    <p className='m-0'>Offerta lavoro</p>
+                                                    <p className='m-0 text-truncate' style={{maxWidth: '40%'}}>Descrizione lavoroooooooooo</p>
+                                                </Col>
+                                            </Row>
+                                            )
+                                        })}
                                     </Container>
                                 </>
                             )
