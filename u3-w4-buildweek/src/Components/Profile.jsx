@@ -9,8 +9,8 @@ const Profile = function () {
   return (
     <>
       <Container>
-        <Row className="mx-5">
-          <Col xs={12} md={8} lg={8} className="mx-3 d-flex flex-column gap-3">
+        <Row className="mx-0 ms-sm-5">
+          <Col  lg={8} className="mx-0 mx-sm-3 d-flex flex-column gap-3">
             <User />
             <Experience />
           </Col>

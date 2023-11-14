@@ -1,13 +1,15 @@
 import { useEffect, useState, } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { Bell, BellFill, PlusLg, Trash, VolumeUpFill } from "react-bootstrap-icons";
+import { Bell, BellFill, Check2, PlusLg, Trash, Trash2Fill, VolumeUpFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../Redux/actions/fetchUser";
 
 const User = function () {
   const [isClicked, setIsClicked] = useState(false);
   const [showTolltip, setShowTolltip] = useState(false)
+  const [seguiButton, setSeguiButton] = useState(false)
   const handleClick = () => { setIsClicked(!isClicked)}
+  const handleSeguiButton = () => {setSeguiButton((statoSegui)=>!statoSegui)}
   const handleMouseEnter = () => {setShowTolltip(true)}
   const handleMouseLeave = () => {setShowTolltip(false)}
   const dispatch = useDispatch();
@@ -100,8 +102,9 @@ const User = function () {
                     <Button variant="primary" className="rounded-pill">
                       Messaggio
                     </Button>
-                    <Button variant="outline-primary" className="rounded-pill ms-2 d-none d-md-inline-block">
-                      <PlusLg className="mb-1" /> Segui
+                    <Button variant={seguiButton ? "outline-secondary" : "outline-primary"} className="rounded-pill ms-2 d-none d-md-inline-block" onClick={handleSeguiButton}>
+                       {seguiButton ? <Check2 className="mb-1 me-1" /> : <PlusLg className="mb-1 me-1" />}
+                       {seguiButton ? "Già segui" : "Segui"}
                     </Button>
                     <Button variant="outline-secondary" className="rounded-pill ms-2 d-none d-md-inline-block">
                       Altro
