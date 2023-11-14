@@ -1,6 +1,6 @@
 import { useEffect, useState, } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { Bell, BellFill, Check2, PlusLg, Trash, Trash2Fill, VolumeUpFill } from "react-bootstrap-icons";
+import { Bell, BellFill, Check2, PlusLg, VolumeUpFill } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../Redux/actions/fetchUser";
 

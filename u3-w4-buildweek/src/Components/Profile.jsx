@@ -3,7 +3,7 @@ import User from "./User";
 import Chat from "./Chat";
 import { Col, Container, Row } from "react-bootstrap";
 import Experience from "./Experience";
-import { useSelector } from "react-redux";
+
 
 const Profile = function () {
   return (
