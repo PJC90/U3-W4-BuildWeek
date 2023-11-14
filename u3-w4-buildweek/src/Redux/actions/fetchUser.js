@@ -3,7 +3,7 @@ export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE'
 
 const baseEndpoint = 'https://striveschool-api.herokuapp.com/api/profile/me'
 
-export const fetchUser = async (dispatch) => {
+export const fetchUser = () => async (dispatch) => {
   try {
     let response = await fetch(baseEndpoint, {
       method: 'GET',
