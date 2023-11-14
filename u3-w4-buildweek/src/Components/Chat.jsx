@@ -5,7 +5,7 @@ import { PencilSquare } from 'react-bootstrap-icons';
 // import { Search } from 'react-bootstrap-icons';
 import { CaretDown } from 'react-bootstrap-icons';
 import { PersonCircle } from 'react-bootstrap-icons';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Dropdown, Row } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { CaretUp } from 'react-bootstrap-icons';
 
@@ -13,6 +13,7 @@ const Chat = function () {
 
     const [isChatClosed, setIsChatClosed] = useState(true)
     const [users, setUsers] = useState([])
+    const [searchUser, setSearchUser] = useState('')
 
     const toggleChat = () => {
         setIsChatClosed(!isChatClosed)
@@ -48,14 +49,14 @@ const Chat = function () {
     return (
         <Container>
             <Row>
-                <Col className='position-fixed bottom-0 end-0' xs={12} sm={7} md={5} lg={4}>
+                <Col className='position-fixed bottom-0 end-0' xs={12} sm={7} md={5} lg={4} xl={3}>
                     <ListGroup >
-                        <ListGroup.Item className='d-flex justify-content-between align-items-center'>
+                        <ListGroup.Item className='d-flex justify-content-between align-items-center' style={{backgroundColor: '#0e76a8', color: 'white'}}>
                             <div className='d-flex align-items-center'>
                             <PersonCircle className='fs-1'/>
-                            <p className='m-0 ms-2'>Messaggistica</p>
+                            <p className='m-0 ms-2' style={{backgroundColor: '#0e76a8'}}>Messaggistica</p>
                             </div>
-                            <div>
+                            <div className='d-flex w-50 justify-content-evenly ms-4'>
                             <ThreeDots className='me-2'/>
                             <PencilSquare className='me-2'/>
                             {isChatClosed ? 
@@ -74,11 +75,20 @@ const Chat = function () {
                                 <>
                                     <Form>
                                         <Form.Group className="mb-3">
-                                            <Form.Control type="text" placeholder='Cerca messaggi' className="searchchat-bg" style={{backgroundColor: '#bed6ff'}}/>
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder='Cerca messaggi' 
+                                                style={{backgroundColor: '#bed6ff'}} 
+                                                value={searchUser} 
+                                                onChange={(e) => {
+                                                    setSearchUser(e.target.value)
+                                            }}/>
                                         </Form.Group>
                                     </Form>
                                     <Container style={{maxHeight: 400, overflow: 'auto'}}>
-                                        {users.map((utente) => {
+                                        {users
+                                        .filter((utente) => utente.name.toLowerCase().includes(searchUser.toLowerCase()))
+                                        .map((utente) => {
                                             return (
                                                 <Row className='align-items-center mt-3 pb-2 border-bottom'>
                                                 <Col className='col-4 p-0'>

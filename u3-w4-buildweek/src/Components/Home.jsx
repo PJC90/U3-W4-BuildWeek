@@ -25,7 +25,7 @@ const Home = function () {
       </Container>
       <Container fluid>
         <Row>
-          <Col xs={7} md={5} lg={4} className="ms-auto me-5">
+          <Col xs={12} sm={7} md={5} lg={4} xl={3} className="ms-auto me-5">
             <Chat />
           </Col>
         </Row>
