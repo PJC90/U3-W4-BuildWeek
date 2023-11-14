@@ -4,14 +4,10 @@ import Chat from "./Chat";
 import { Col, Container, Row } from "react-bootstrap";
 import Experience from "./Experience";
 import { useSelector } from "react-redux";
-import OverlayLoading from "./OverlayLoading";
-import Navbar from "./Navbar";
 
-const Home = function () {
+const Profile = function () {
   return (
     <>
-      <OverlayLoading />
-      <Navbar />
       <Container>
         <Row className="mx-5">
           <Col xs={12} md={8} lg={8} className="mx-3 d-flex flex-column gap-3">
@@ -34,4 +30,4 @@ const Home = function () {
   );
 };
 
-export default Home;
+export default Profile;
