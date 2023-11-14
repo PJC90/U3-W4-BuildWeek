@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../Redux/actions/fetchUser";
 
 const User = function () {
-
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
 
