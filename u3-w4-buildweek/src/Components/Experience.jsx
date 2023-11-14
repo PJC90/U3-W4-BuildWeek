@@ -10,6 +10,7 @@ import { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ExperienceCard from "./ExperienceCard";
 import { setLoading } from "../Redux/actions/loading";
+import ExperienceModal from "./ExperienceModal";
 
 const Experience = function () {
   const allExperiences = useSelector(
@@ -18,6 +19,8 @@ const Experience = function () {
   const personalProfile = useSelector(
     (state) => state.experiences.personalProfile
   );
+
+  const isLoading = useSelector((state) => state.loading.isLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,7 +66,13 @@ const Experience = function () {
       fluid
       className="d-flex flex-column gap-2 py-2 bg-white rounded-3"
     >
-      <h5 className="fw-semibold">Esperienza</h5>
+      {!isLoading && (
+        <div className="d-flex justify-content-between">
+          <h5 className="fw-semibold">Esperienza</h5>
+          <ExperienceModal personalProfile={personalProfile} />
+        </div>
+      )}
+
       {allExperiences !== null
         ? allExperiences.map((experience) => (
             <Fragment key={experience._id}>

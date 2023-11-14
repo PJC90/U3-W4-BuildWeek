@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Card,
   Button,
@@ -31,6 +32,8 @@ import { useState } from "react";
 const Post = ({ post }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
+
+  const navigate = useNavigate();
 
   const formatDistance = (startDate, endDate) => {
     startDate = new Date(startDate);
@@ -67,6 +70,10 @@ const Post = ({ post }) => {
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const openProfile = () => {
+    navigate("/profile/" + post.user._id);
   };
 
   useEffect(() => {
@@ -115,7 +122,11 @@ const Post = ({ post }) => {
             />
           </Col>
           <Col className="ps-0">
-            <Card.Title className="fs-6 fw-semibold">
+            <Card.Title
+              className="fs-6 fw-semibold"
+              role="button"
+              onClick={openProfile}
+            >
               {post.user.username.split("@")[0]}
             </Card.Title>
             <Card.Subtitle className="text-muted d-flex flex-column small">
