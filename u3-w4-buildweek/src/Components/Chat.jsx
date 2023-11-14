@@ -18,9 +18,11 @@ const Chat = function () {
         setIsChatClosed(!isChatClosed)
     }
 
+    // className='position-fixed bottom-0 end-0'
+
     return (
-        <>
-            <ListGroup className='position-fixed bottom-0 end-0'>
+        <div className='position-fixed bottom-0 end-0'>
+            <ListGroup >
                 <ListGroup.Item className='d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                     <PersonCircle className='fs-1'/>
@@ -82,7 +84,7 @@ const Chat = function () {
                     }
                 </ListGroup.Item>
             </ListGroup>
-        </>
+        </div>
     )
 };
 
