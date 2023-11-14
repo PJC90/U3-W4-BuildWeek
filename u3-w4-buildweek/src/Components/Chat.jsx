@@ -20,7 +20,7 @@ const Chat = function () {
 
     return (
         <>
-            <ListGroup >
+            <ListGroup className='position-fixed bottom-0 end-0'>
                 <ListGroup.Item className='d-flex justify-content-between align-items-center'>
                     <div className='d-flex align-items-center'>
                     <PersonCircle className='fs-1'/>
