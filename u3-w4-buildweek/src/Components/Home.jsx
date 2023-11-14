@@ -5,6 +5,11 @@ import { Col, Container, Row } from "react-bootstrap";
 import Experience from "./Experience";
 import { useSelector } from "react-redux";
 import OverlayLoading from "./OverlayLoading";
+import Formazione from "./Formazione";
+import Certificazioni from "./Certificazioni";
+import Volontariato from "./Volontariato";
+import Competenze from "./Competenze";
+import Pubblicazioni from "./Pubblicazioni";
 
 const Home = function () {
   return (
@@ -15,6 +20,12 @@ const Home = function () {
           <Col xs={12} md={8} lg={8} className="mx-3 d-flex flex-column gap-3">
             <User />
             <Experience />
+            <Formazione/>
+            <Certificazioni/>
+            <Volontariato/>
+            <Competenze/>
+            <Pubblicazioni/>
+            <Lingue/>
           </Col>
           <Col lg={3}>
             <Sidebar />
