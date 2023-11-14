@@ -5,7 +5,9 @@ import { useEffect, useRef } from "react";
 import { getMyProfile } from "../Redux/actions";
 
 const BackOffice = function () {
-  const personalProfile = useSelector((state) => state.personalProfile);
+  const personalProfile = useSelector(
+    (state) => state.experiences.personalProfile
+  );
   const [formInputData, setFormData] = useState({
     role: "",
     company: "",

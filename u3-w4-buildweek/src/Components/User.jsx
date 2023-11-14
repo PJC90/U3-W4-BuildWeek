@@ -8,6 +8,11 @@ const User = function () {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
 
+  const isLoading = useSelector((state) => state.loading.isLoading);
+  const allExperiences = useSelector(
+    (state) => state.experiences.allExperiences
+  );
+
   useEffect(() => {
     console.log("Fetch");
     dispatch(fetchUser());
@@ -22,7 +27,7 @@ const User = function () {
   console.log("ciao");
   return (
     <>
-      {userData && (
+      {userData && !isLoading && (
         <Card className="mt-5">
           <Card.Img
             variant="top"
@@ -56,8 +61,21 @@ const User = function () {
                 </div>
               </Col>
               <Col className="d-none d-lg-block" lg={4}>
-                <div>Esperienza 1</div>
-                <div>Esperienza 2</div>
+                {allExperiences.slice(0, 2).map((experience) => (
+                  <div
+                    key={experience._key}
+                    className="d-lg-flex align-items-center gap-2 pb-2"
+                  >
+                    <Col lg={2}>
+                      <img
+                        src={experience.image}
+                        alt="experience"
+                        className="img-fluid"
+                      />
+                    </Col>
+                    <Col>{experience.role}</Col>
+                  </div>
+                ))}
               </Col>
             </Row>
 
