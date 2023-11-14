@@ -1,13 +1,14 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import reducer from '../reducers/reducer'
-import userReducer from '../reducers/userReducer'
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import reducer from "../reducers/reducer";
+import loadingReducer from "../reducers/loadingReducer";
+import userReducer from "../reducers/userReducer";
 
-const bigReducer = combineReducers({
-  user: userReducer,
+const rootReducer = combineReducers({
+  loading: loadingReducer,
   experiences: reducer,
-})
+  user: userReducer
+});
 
-const store = configureStore({ reducer: bigReducer })
-// const store = configureStore({ reducer: userReducer })
+const store = configureStore({ reducer: rootReducer });
 
-export default store
+export default store;

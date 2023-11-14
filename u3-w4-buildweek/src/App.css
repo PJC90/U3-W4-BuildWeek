@@ -1,6 +1,25 @@
 #root {
   background-color: #f4f2ee;
 }
-p{
+p {
   background-color: white;
+}
+
+/* overlay, loading */
+.container-fluid.fade-out {
+  animation: fadeout 1.3s ease-in-out;
+  animation-fill-mode: forwards;
+  padding: 0;
+  margin: 0;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 }
