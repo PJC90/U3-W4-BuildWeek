@@ -153,7 +153,7 @@ const Post = ({ post }) => {
           <Container fluid>
             <Row>
               <Col className="px-0 border-0">
-                <Image src={post.image} fluid />
+                <Image src={post.image} className="img-fluid w-100" />
               </Col>
             </Row>
           </Container>
