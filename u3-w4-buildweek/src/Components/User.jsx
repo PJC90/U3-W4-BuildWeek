@@ -5,54 +5,54 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../Redux/actions/fetchUser";
 
 const User = function () {
-  const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/me";
-  const [userData, setUserData] = useState(null);
+  // const baseEndpoint = "https://striveschool-api.herokuapp.com/api/profile/me"
+  // const [userData, setUserData] = useState(null)
 
-  const isLoading = useSelector((state) => state.loading.isLoading);
-  const allExperiences = useSelector(
-    (state) => state.experiences.allExperiences
-  );
+  // const showProfile = async ()=>{
+  // try {
+  //     let response = await fetch( baseEndpoint,
+  //       {
+  //         method: 'GET',
+  //         headers: {
+  //             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMjc5MWM1NWU3ZTAwMThmODNjNDciLCJpYXQiOjE2OTk4ODI4OTcsImV4cCI6MTcwMTA5MjQ5N30.kOr7iDAngb-ynvpkBFXSJFA4dTCuVin-ZGRTDWNQLGk',
+  //         },
+  //       }
+  //     )
+  //     if (response.ok) {
+  //       const  data  = await response.json();
+  //       console.log("dati ricevuti", data)
+  //       setUserData(data)
 
-  const showProfile = async () => {
-    try {
-      let response = await fetch(baseEndpoint, {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMjc5MWM1NWU3ZTAwMThmODNjNDciLCJpYXQiOjE2OTk4ODI4OTcsImV4cCI6MTcwMTA5MjQ5N30.kOr7iDAngb-ynvpkBFXSJFA4dTCuVin-ZGRTDWNQLGk"
-        }
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log("dati ricevuti", data);
-        setUserData(data);
-      } else {
-        throw new Error("errore recupero dati");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     } else {
+  //       throw new Error("errore recupero dati");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
+
+  // useEffect(()=>{
+  //     showProfile()
+  // },[])
+
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
 
   useEffect(() => {
-    showProfile();
+    console.log("Fetch");
+    dispatch(fetchUser());
   }, []);
 
-  // const dispatch = useDispatch()
-  // const userData = useSelector((state)=>state.user.userData)
-
-  // useEffect (()=>{
-  //     dispatch(fetchUser())
-  // },[dispatch])
-
-  // if (!userData) {
-  //     // Se userData è ancora undefined, puoi renderizzare un loader o un messaggio di caricamento
-  //     return <div>Loading...</div>;
-  //   }
-
+  if (!userData) {
+    // Se userData è ancora undefined
+    console.log("loading");
+    return <div>Loading...</div>;
+  }
+  console.log(userData);
+  console.log("ciao");
   return (
     <>
-      {userData && !isLoading && (
+      {userData && (
         <Card className="mt-5">
           <Card.Img
             variant="top"
@@ -86,9 +86,8 @@ const User = function () {
                 </div>
               </Col>
               <Col className="d-none d-lg-block" lg={4}>
-                {allExperiences.slice(0, 2).map((experience) => (
-                  <div key={experience._id}>{experience.role}</div>
-                ))}
+                <div>Esperienza 1</div>
+                <div>Esperienza 2</div>
               </Col>
             </Row>
 

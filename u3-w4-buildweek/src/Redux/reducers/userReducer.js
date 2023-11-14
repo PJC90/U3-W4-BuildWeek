@@ -2,7 +2,7 @@ import { FETCH_USER_FAILURE, FETCH_USER_SUCCESS } from '../actions/fetchUser'
 
 const initialState = {
   userData: null,
-  loading: false,
+  loading: true,
   error: false,
 }
 
