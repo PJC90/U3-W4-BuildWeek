@@ -28,7 +28,6 @@ const BackOffice = function () {
     profileFetchedRef.current = true;
     // dispatch(setExperience(personalProfile._id));
     setUserId(personalProfile._id);
-    alert(userId);
   }
 
   const handleFileChange = (event) => {
