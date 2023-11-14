@@ -1,17 +1,31 @@
-import { useEffect, useState, } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { Bell, BellFill, Check2, PlusLg, VolumeUpFill } from "react-bootstrap-icons";
+import {
+  Bell,
+  BellFill,
+  Check2,
+  PlusLg,
+  VolumeUpFill
+} from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../Redux/actions/fetchUser";
 
 const User = function () {
   const [isClicked, setIsClicked] = useState(false);
-  const [showTolltip, setShowTolltip] = useState(false)
-  const [seguiButton, setSeguiButton] = useState(false)
-  const handleClick = () => { setIsClicked(!isClicked)}
-  const handleSeguiButton = () => {setSeguiButton((statoSegui)=>!statoSegui)}
-  const handleMouseEnter = () => {setShowTolltip(true)}
-  const handleMouseLeave = () => {setShowTolltip(false)}
+  const [showTolltip, setShowTolltip] = useState(false);
+  const [seguiButton, setSeguiButton] = useState(false);
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+  };
+  const handleSeguiButton = () => {
+    setSeguiButton((statoSegui) => !statoSegui);
+  };
+  const handleMouseEnter = () => {
+    setShowTolltip(true);
+  };
+  const handleMouseLeave = () => {
+    setShowTolltip(false);
+  };
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -54,29 +68,41 @@ const User = function () {
                 border: "5px solid white"
               }}
             />
-            {isClicked ? 
-            (<BellFill className="fs-4 d-flex ms-auto me-2 mb-2" onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>)
-            :
-            (<Bell className="fs-4 d-flex ms-auto me-2 mb-2" onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}/>)
-            }
-            {showTolltip &&
-            <div
-            style={{
-              position: 'absolute',
-              top: '20%',
-              right: "-20%",
-              backgroundColor: '#fff',
-              padding: '5px',
-              border: '1px solid #ccc',
-              borderRadius: '3px',
-              boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.46)',
-            }}
-            >
-                {isClicked && `Ricevi Notifiche solo per i post principali di ${userData.name}`}
-                {!isClicked && `Ricevi Notifiche per tutti i post di ${userData.name}`}
-            </div>}
-            
-            
+            {isClicked ? (
+              <BellFill
+                className="fs-4 d-flex ms-auto me-2 mb-2"
+                onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              />
+            ) : (
+              <Bell
+                className="fs-4 d-flex ms-auto me-2 mb-2"
+                onClick={handleClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              />
+            )}
+            {showTolltip && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "20%",
+                  right: "-20%",
+                  backgroundColor: "#fff",
+                  padding: "5px",
+                  border: "1px solid #ccc",
+                  borderRadius: "3px",
+                  boxShadow: "0px 8px 16px 0px rgba(0,0,0,0.46)"
+                }}
+              >
+                {isClicked &&
+                  `Ricevi Notifiche solo per i post principali di ${userData.name}`}
+                {!isClicked &&
+                  `Ricevi Notifiche per tutti i post di ${userData.name}`}
+              </div>
+            )}
+
             <Row>
               <Col>
                 <div className="d-flex align-items-end">
@@ -88,34 +114,50 @@ const User = function () {
                   </p>
                 </div>
                 <div className="ms-1 mt-1">
-                    <Card.Text className="mb-0">{userData.title}</Card.Text>
-                    <Card.Text className="mb-0">{userData.title}</Card.Text>
-                    <Card.Text className="text-secondary mt-2 mb-0">
-                      {userData.area}
-                    </Card.Text>
-                    <Card.Text className=" mb-1">
-                      <a href="a">Informazioni di contatto</a>
-                    </Card.Text>
-                    <Card.Text className="text-secondary">
-                      Più di 500 collegamenti
-                    </Card.Text>
-                    <Button variant="primary" className="rounded-pill">
-                      Messaggio
-                    </Button>
-                    <Button variant={seguiButton ? "outline-secondary" : "outline-primary"} className="rounded-pill ms-2 d-none d-md-inline-block" onClick={handleSeguiButton}>
-                       {seguiButton ? <Check2 className="mb-1 me-1" /> : <PlusLg className="mb-1 me-1" />}
-                       {seguiButton ? "Già segui" : "Segui"}
-                    </Button>
-                    <Button variant="outline-secondary" className="rounded-pill ms-2 d-none d-md-inline-block">
-                      Altro
-                    </Button>
-                    <Button variant="outline-secondary" className="rounded-pill ms-2 d-md-none">
+                  <Card.Text className="mb-0">{userData.title}</Card.Text>
+                  <Card.Text className="mb-0">{userData.title}</Card.Text>
+                  <Card.Text className="text-secondary mt-2 mb-0">
+                    {userData.area}
+                  </Card.Text>
+                  <Card.Text className=" mb-1">
+                    <a href="a">Informazioni di contatto</a>
+                  </Card.Text>
+                  <Card.Text className="text-secondary">
+                    Più di 500 collegamenti
+                  </Card.Text>
+                  <Button variant="primary" className="rounded-pill">
+                    Messaggio
+                  </Button>
+                  <Button
+                    variant={
+                      seguiButton ? "outline-secondary" : "outline-primary"
+                    }
+                    className="rounded-pill ms-2 d-none d-md-inline-block"
+                    onClick={handleSeguiButton}
+                  >
+                    {seguiButton ? (
+                      <Check2 className="mb-1 me-1" />
+                    ) : (
+                      <PlusLg className="mb-1 me-1" />
+                    )}
+                    {seguiButton ? "Già segui" : "Segui"}
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    className="rounded-pill ms-2 d-none d-md-inline-block"
+                  >
+                    Altro
+                  </Button>
+                  <Button
+                    variant="outline-secondary"
+                    className="rounded-pill ms-2 d-md-none"
+                  >
                     •••
-                    </Button>
-                  </div>
+                  </Button>
+                </div>
               </Col>
               <Col className="d-none d-lg-block" lg={4}>
-                {allExperiences.slice(0, 3).map((experience) => (
+                {allExperiences.slice(0, 2).map((experience) => (
                   <div
                     key={experience._id}
                     className="d-lg-flex align-items-center gap-2 pb-2"
@@ -132,8 +174,6 @@ const User = function () {
                 ))}
               </Col>
             </Row>
-
-            
           </Card.Body>
         </Card>
       )}
