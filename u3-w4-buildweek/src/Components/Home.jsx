@@ -3,13 +3,16 @@ import User from "./User";
 import Chat from "./Chat";
 import { Col, Container, Row } from "react-bootstrap";
 import Experience from "./Experience";
+import { useSelector } from "react-redux";
+import OverlayLoading from "./OverlayLoading";
 
 const Home = function () {
   return (
     <>
+      <OverlayLoading />
       <Container>
         <Row className="mx-5">
-          <Col xs={12} md={8} lg={8} className="mx-3">
+          <Col xs={12} md={8} lg={8} className="mx-3 d-flex flex-column gap-3">
             <User />
             <Experience />
           </Col>
@@ -18,11 +21,13 @@ const Home = function () {
           </Col>
         </Row>
       </Container>
-      <Row>
-        <Col md={2} className="ms-auto me-5">
-          <Chat />
-        </Col>
-      </Row>
+      <Container fluid>
+        <Row>
+          <Col md={2} className="ms-auto me-5">
+            <Chat />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

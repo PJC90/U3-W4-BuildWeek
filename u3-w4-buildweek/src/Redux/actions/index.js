@@ -79,6 +79,7 @@ export const getMyProfile = () => async (dispatch) => {
     if (response.ok) {
       const data = await response.json();
       dispatch(setPersonalProfile(data));
+      return data;
     } else {
       throw new Error("Network error.");
     }

@@ -6,17 +6,30 @@ import {
   setAllProfiles,
   setExperience
 } from "../Redux/actions";
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ExperienceCard from "./ExperienceCard";
+import { setLoading } from "../Redux/actions/loading";
 
 const Experience = function () {
-  const allExperiences = useSelector((state) => state.allExperiences);
-  const personalProfile = useSelector((state) => state.personalProfile);
-  const profileFetchedRef = useRef(false);
+  const allExperiences = useSelector(
+    (state) => state.experiences.allExperiences
+  );
+  const personalProfile = useSelector(
+    (state) => state.experiences.personalProfile
+  );
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getMyProfile());
+    dispatch(getMyProfile()).then((personalProfile) => {
+      if (personalProfile) {
+        dispatch(getAllExperiences(personalProfile._id)).then(() => {
+          dispatch(setLoading(false));
+        });
+        //aggiungi un altro then, al termine del quale setti uno state 'loading'su false.
+        //sposta il codice in app.js, cosi tutti i componenti avranno a disposizione i dati all'avvio della pagina
+      }
+    });
   }, []);
 
   const removeExperience = async function (experienceId) {
@@ -38,12 +51,13 @@ const Experience = function () {
     }
   };
 
-  if (personalProfile && !profileFetchedRef.current) {
-    // alert("richiesta");
-    profileFetchedRef.current = true;
-    // dispatch(setExperience(personalProfile._id));
-    dispatch(getAllExperiences(personalProfile._id));
-  }
+  // if (personalProfile && !profileFetchedRef.current) {
+  //   // alert("richiesta");
+  //   profileFetchedRef.current = true;
+  //   // dispatch(setExperience(personalProfile._id));
+  //   dispatch(getAllExperiences(personalProfile._id));
+  // }
+
   return (
     <Container
       fluid
@@ -52,12 +66,12 @@ const Experience = function () {
       <h5 className="fw-semibold">Esperienza</h5>
       {allExperiences !== null
         ? allExperiences.map((experience) => (
-            <>
-              <ExperienceCard key={experience._id} experience={experience} />
+            <Fragment key={experience._id}>
+              <ExperienceCard experience={experience} />
               {/* <button onClick={() => removeExperience(experience._id)}>
                 rimuovi
               </button> */}
-            </>
+            </Fragment>
           ))
         : null}
     </Container>
