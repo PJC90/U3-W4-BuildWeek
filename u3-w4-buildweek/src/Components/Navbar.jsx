@@ -16,10 +16,10 @@ import { Search } from "react-bootstrap-icons";
 
 function LinkedinNav() {
   return (
-    <Container fluid>
+    <Container fluid className="h-100">
       <Navbar
-        className="d-flex row bg-white mt-3 mb-3 pt-4 border-bottom border-light-emphasis"
-        style={{ fontSize: "12px", height: "50px" }}
+        className="d-flex row bg-white pt-3 mb-3 pt-4 border-bottom border-light-emphasis"
+        style={{ fontSize: "12px", height: "70px" }}
       >
         <Row className="">
           <Col className="col col-md-9 ">
