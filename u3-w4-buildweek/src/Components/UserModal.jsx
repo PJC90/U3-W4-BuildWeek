@@ -1,11 +1,16 @@
-import { Button, Form, Modal } from "react-bootstrap";
+import { Button, Form, Modal, } from "react-bootstrap";
 
 const UserModal = ({ show, handleClose, handleSaveChanges, profileData, setProfileData }) => {
-    return (
+    
+  const handleChange = (field, value) => {setProfileData({
+    ...profileData, [field]: value})}
+  
+  return (
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modifica Profilo</Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <Form>
             <Form.Group controlId="formName">
@@ -13,26 +18,24 @@ const UserModal = ({ show, handleClose, handleSaveChanges, profileData, setProfi
               <Form.Control
                 type="text"
                 placeholder="Inserisci il tuo nome"
-                value={profileData.name}
-                onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
+                onChange={(e) => handleChange( "name", e.target.value )}
               />
             </Form.Group>
-            <Form.Group controlId="formSurname">
-              <Form.Label className="mt-2 mb-1">Cognome</Form.Label>
+            <Form.Group controlId="formName">
+              <Form.Label className="mb-1">Cognome</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Inserisci il tuo cognome"
-                value={profileData.surname}
-                onChange={(e) => setProfileData({ ...profileData, surname: e.target.value })}
+                placeholder="Inserisci il tuo nome"
+                onChange={(e) => handleChange( "surname", e.target.value )}
               />
             </Form.Group>
+            
             <Form.Group controlId="formEmail">
               <Form.Label className="mt-2 mb-1">Email</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Inserisci la tua mail"
-                value={profileData.email}
-                onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
+                onChange={(e) => handleChange( "email", e.target.value )}
               />
             </Form.Group>
             <Form.Group controlId="formUsername">
@@ -40,8 +43,15 @@ const UserModal = ({ show, handleClose, handleSaveChanges, profileData, setProfi
               <Form.Control
                 type="text"
                 placeholder="Inserisci la tua username"
-                value={profileData.username}
-                onChange={(e) => setProfileData({ ...profileData, username: e.target.value })}
+                onChange={(e) => handleChange( "username",  e.target.value )}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBio">
+              <Form.Label className="mt-2 mb-1">Bio</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="inserisci una biografia"
+                onChange={(e) => handleChange( "bio", e.target.value )}
               />
             </Form.Group>
             <Form.Group controlId="formTitle">
@@ -49,31 +59,28 @@ const UserModal = ({ show, handleClose, handleSaveChanges, profileData, setProfi
               <Form.Control
                 type="text"
                 placeholder="Inserisci il tuo titolo di studi"
-                value={profileData.title}
-                onChange={(e) => setProfileData({ ...profileData, title: e.target.value })}
+                onChange={(e) => handleChange( "title",  e.target.value )}
               />
             </Form.Group>
-            <Form.Group controlId="formArea">
+            <Form.Group controlId="formResidenza">
               <Form.Label className="mt-2 mb-1">Residenza</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Inserisci la tua residenza"
-                value={profileData.area}
-                onChange={(e) => setProfileData({ ...profileData, area: e.target.value })}
+                onChange={(e) => handleChange( "area",  e.target.value )}
               />
             </Form.Group>
+            
             <Form.Group controlId="formImage">
               <Form.Label className="mt-2 mb-1">Immagine</Form.Label>
               <Form.Control
-                type="file"
-                // accept="image/*"
+                type="text"
                 placeholder="Inserisci la tua immagine"
-                value={profileData.image}
-                onChange={(e) => setProfileData({ ...profileData, image: e.target.value })}
+                onChange={(e) => handleChange("image", e.target.value )}
               />
             </Form.Group>
-          </Form>
-        </Modal.Body>
+            </Form>
+            </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Annulla

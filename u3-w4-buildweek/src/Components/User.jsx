@@ -21,7 +21,16 @@ const User = function () {
   const [showTolltip, setShowTolltip] = useState(false);
   const [seguiButton, setSeguiButton] = useState(false);
   const [showModal, setShowModal] = useState(false)
-  const [profileData, setProfileData] = useState({})
+  const [profileData, setProfileData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    username: "",
+    bio: "",
+    title: "",
+    area: "",
+    image: ""
+  })
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -35,7 +44,31 @@ const User = function () {
     setShowTolltip(false);
   };
   const handleEditClick = () => {setShowModal(true)}
-  const handleSaveChanges = async () => {setShowModal(false)}
+
+  const handleSaveChanges = async () => {
+    try {
+      
+      let response = await fetch('https://striveschool-api.herokuapp.com/api/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMjc5MWM1NWU3ZTAwMThmODNjNDciLCJpYXQiOjE2OTk4ODI4OTcsImV4cCI6MTcwMTA5MjQ5N30.kOr7iDAngb-ynvpkBFXSJFA4dTCuVin-ZGRTDWNQLGk',
+        },
+        body: JSON.stringify(profileData),
+      });
+
+      if (response.ok) {
+        dispatch(fetchUser())
+      } else {
+        throw new Error('Errore durante la modifica dei dati del profilo');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    setShowModal(false)
+  }
+
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -53,8 +86,7 @@ const User = function () {
     console.log("loading");
     return <div>Loading...</div>;
   }
-  console.log(userData);
-  console.log("ciao");
+  
   return (
     <>
       {userData && !isLoading && (
@@ -70,6 +102,7 @@ const User = function () {
               alt="image-profile"
               style={{
                 width: "150px",
+                height:"150px",
                 position: "absolute",
                 top: "0%",
                 left: "3%",
@@ -116,7 +149,7 @@ const User = function () {
             <Row>
               <Col>
                 <div className="d-flex align-items-end">
-                  <Card.Title className="ms-0 mb-0 fs-3">
+                  <Card.Title className="ms-0 mb-0 fs-4">
                     {userData.name} {userData.surname}{" "}
                   </Card.Title>
                   <p className="text-secondary ms-2 mb-0">
@@ -124,7 +157,6 @@ const User = function () {
                   </p>
                 </div>
                 <div className="ms-1 mt-1">
-                  <Card.Text className="mb-0">{userData.title}</Card.Text>
                   <Card.Text className="mb-0">{userData.title}</Card.Text>
                   <Card.Text className="text-secondary mt-2 mb-0">
                     {userData.area}
