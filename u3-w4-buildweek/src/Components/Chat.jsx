@@ -49,7 +49,7 @@ const Chat = function () {
     return (
         <Container>
             <Row>
-                <Col className='position-fixed bottom-0 end-0' xs={12} sm={7} md={5} lg={4} xl={3}>
+                <Col className='position-fixed bottom-0 end-0' md={5} lg={4} xl={2}>
                     <ListGroup >
                         <ListGroup.Item className='d-flex justify-content-between align-items-center' style={{backgroundColor: '#0e76a8', color: 'white'}}>
                             <div className='d-flex align-items-center'>
