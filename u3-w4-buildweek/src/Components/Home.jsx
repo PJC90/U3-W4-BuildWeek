@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../Redux/actions/loading";
 import { getAllPosts } from "../Redux/actions/posts";
 import Post from "./Post";
+import RightSideBar from "./RightSideBarHome";
 
 const Home = function () {
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -23,7 +24,9 @@ const Home = function () {
             ? allPosts.map((post) => <Post key={post._id} post={post} />)
             : null}
         </Col>
-        <Col lg={3}>right-sidebar</Col>
+        <Col lg={3} style={{marginTop: '1rem'}}>
+          <RightSideBar />
+        </Col>
       </Row>
     </Container>
   );
