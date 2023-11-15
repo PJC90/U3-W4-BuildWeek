@@ -2,8 +2,10 @@ import Sole24 from '../SidebarImgs/sole24ore.png'
 import Pubblicità from '../SidebarImgs/pubblicità.png';
 import CercoLavoro from '../SidebarImgs/cercolavoro.png';
 import { useEffect, useState } from 'react';
-import { SendFill, Lock, PersonPlusFill, Plus} from 'react-bootstrap-icons';
+import { SendFill, PersonPlusFill, Plus} from 'react-bootstrap-icons';
 import '../Sidebar.css'
+import { Link } from 'react-router-dom';
+
 
 const Sidebar = function () {
   const [profileData, setProfileData] = useState([]);
@@ -24,6 +26,7 @@ const Sidebar = function () {
         return response.json();
       })
       .then(data => {
+        console.log(data)
         setProfileData(data.slice(0, 10)); 
       })
       .catch(error => {
@@ -34,109 +37,66 @@ const Sidebar = function () {
     fetchData();
   }, []);
 
+  const Sezione1 = (start, end) => {
+    return profileData.slice(start, end).map((profile, index) => (
+      <div className='d-flex ms-3' key={index}>
+        <img src={profile.image} alt='immagine del profilo' style={{ width: '2.6em', height: '2.6em', borderRadius: '30px' }} />
+        <div className='ms-3'>
+          <Link to={`/profile/${profile._id}`} className='fw-bold text-decoration-none text-black titol'>
+            {`${profile.name} ${profile.surname}`}
+          </Link>
+          <p className='mb-1'>{profile.title}</p>
+          <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{ width: '8em' }}>
+            <SendFill className='me-2' />
+            Messaggio
+          </button>
+        </div>
+      </div>
+    ));
+  };
+
+  const Sezione2 = (start, end) => {
+    return profileData.slice(start, end).map((profile, index) => (
+      <div className='d-flex ms-3' key={index}>
+        <img src={profile.image} alt='immagine del profilo' style={{ width: '2.6em', height: '2.6em', borderRadius: '30px' }} />
+        <div className='ms-3'>
+          <Link to={`/profile/${profile._id}`} className='fw-bold text-decoration-none text-black titol'>
+            {`${profile.name} ${profile.surname}`}
+          </Link>
+          <p className='mb-1'>{profile.title}</p>
+          <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{ width: '8em' }}>
+            <PersonPlusFill className='me-2' />
+            Collegati
+          </button>
+        </div>
+      </div>
+    ));
+  };
+
+
   return (
-    <>
+    <div className='sidebar-component' style={{ display: window.innerWidth < 678 ? 'none' : 'block', minWidth: '300px' }}>
       <div className='mt-4'>
         <img src={Pubblicità} alt="pubblicità" className='rounded border-dark-subtle w-100' />
       </div>
       {profileData.length > 0 && (
-      <div className='mt-2 bg-white rounded border border-light-subtle w-100'>
-      
-        <h5 className='mt-3 ms-3'>Altri Profili consultati</h5>
-       
-         <div className='d-flex ms-3 mt-3 '>
-            <img src={profileData[0].image} alt='immagine del profilo' style={{width:'2.6em', height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[0].name} ${profileData[0].surname}`}</a>
-             <p className='mb-1'>{profileData[0].title}  ciaociao</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><SendFill className='me-2'/>Messaggio</button>
-            </div>
+        <div className='mt-2 bg-white rounded border border-light-subtle w-100'>
+          <h5 className='mt-3 ms-3'>Altri Profili consultati</h5>
+          {Sezione1(0, 5)}
+          <div className='d-flex justify-content-center border-top border-light-subtle mostra'>
+            <p className='mb-2 mt-2'>Mostra tutto</p>
           </div>
-          <div className='d-flex ms-3 '>
-            <img src={profileData[1].image} alt='immagine del profilo' style={{width:'2.6em' , height:'2.6em', borderRadius:'100px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[1].name} ${profileData[1].surname}`}</a>
-             <p className='mb-1'>{profileData[1].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><Lock className='me-2'/>Messaggio</button>
-            </div>
-          </div>
-          <div className='d-flex ms-3 '>
-            <img src={profileData[2].image} alt='immagine del profilo' style={{width:'2.5em' , height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[2].name} ${profileData[2].surname}`}</a>
-             <p className='mb-1'>{profileData[2].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><SendFill className='me-2'/>Messaggio</button>
-            </div>
-          </div>
-         <div className='d-flex ms-3'>
-            <img src={profileData[3].image} alt='immagine del profilo' style={{width:'2.6em' , height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[3].name} ${profileData[3].surname}`}</a>
-             <p className='mb-1'>{profileData[3].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><SendFill className='me-2'/>Messaggio</button>
-            </div>
-          </div>
-          <div className='d-flex ms-3 '>
-            <img src={profileData[4].image} alt='immagine del profilo' style={{width:'2.6em' , height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[4].name} ${profileData[4].surname}`}</a>
-             <p className='mb-1'>{profileData[4].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><Lock className='me-2'/>Messaggio</button>
-            </div>
-           </div>
-          <div className='d-flex justify-content-center  border-top border-light-subtle mostra'>
-                <p className='mb-2 mt-2'>Mostra tutto</p>
-            </div>
-     </div>
+        </div>
       )}
       {profileData.length > 0 && (
      <div className='mt-2 bg-white rounded border border-light-subtle w-100'>
         <h5 className='mt-3 ms-3 mb-0'>Persone che potresti conoscere</h5>
         <p className='ms-3'>Dalla scuola o università</p>
-         <div className='d-flex ms-3 mt-3 '>
-            <img src={profileData[5].image} alt='immagine del profilo' style={{width:'2.6em', height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[5].name} ${profileData[5].surname}`}</a>
-             <p className='mb-1'>{profileData[5].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><PersonPlusFill className='me-2'/>Collegati</button>
-            </div>
+        {Sezione2(5, 10)}
+          <div className='d-flex justify-content-center border-top border-light-subtle mostra'>
+            <p className='mb-2 mt-2'>Mostra tutto</p>
           </div>
-          <div className='d-flex ms-3 '>
-            <img src={profileData[6].image} alt='immagine del profilo' style={{width:'2.6em' , height:'2.6em', borderRadius:'100px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[6].name} ${profileData[6].surname}`}</a>
-             <p className='mb-1'>{profileData[6].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><PersonPlusFill className='me-2'/>Collegati</button>
-            </div>
-          </div>
-          <div className='d-flex ms-3 '>
-            <img src={profileData[7].image} alt='immagine del profilo' style={{width:'2.5em' , height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[7].name} ${profileData[7].surname}`}</a>
-             <p className='mb-1'>{profileData[7].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><PersonPlusFill className='me-2'/>Collegati</button>
-            </div>
-          </div>
-         <div className='d-flex ms-3'>
-            <img src={profileData[8].image} alt='immagine del profilo' style={{width:'2.6em' , height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[8].name} ${profileData[8].surname}`}</a>
-             <p className='mb-1'>{profileData[8].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><PersonPlusFill className='me-2'/>Collegati</button>
-            </div>
-          </div>
-          <div className='d-flex ms-3 '>
-            <img src={profileData[9].image} alt='immagine del profilo' style={{width:'2.6em' , height:'2.6em', borderRadius:'30px'}} />
-            <div className='ms-3'>
-             <a  href='#h' className='fw-bold text-decoration-none text-black titol'>{`${profileData[9].name} ${profileData[9].surname}`}</a>
-             <p className='mb-1'>{profileData[9].title}</p>
-             <button className='bg-white rounded-pill text-secondary border border-secondary mb-3 bottone' style={{width:'8em'}}><PersonPlusFill className='me-2'/>Collegati</button>
-            </div>
-           </div>
-          <div className='d-flex justify-content-center  border-top border-light-subtle mostra'>
-                <p className='mb-2 mt-2'>Mostra tutto</p>
-            </div>
-     </div>
+        </div>
       )}
       {profileData.length > 0 && (
      <div className='mt-2 bg-white rounded border border-light-subtle w-100'>
@@ -166,7 +126,7 @@ const Sidebar = function () {
       <div className='mt-2'>
         <img src={Pubblicità} alt="pubblicità" className='rounded border-dark-subtle w-100' />
       </div>
-    </>
+  </div>
   );
 };
 
