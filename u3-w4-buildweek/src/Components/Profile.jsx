@@ -4,6 +4,7 @@ import Chat from "./Chat";
 import { Col, Container, Row } from "react-bootstrap";
 import Experience from "./Experience";
 import { useSelector } from "react-redux";
+import { Box } from "react-bootstrap-icons";
 
 const Profile = function () {
   return (
@@ -21,7 +22,7 @@ const Profile = function () {
       </Container>
       <Container fluid>
         <Row>
-          <Col xs={12} sm={7} md={5} lg={4} xl={3} className="ms-auto me-5">
+          <Col md={5} lg={4} xl={2} className="ms-auto me-5 d-none d-md-block">          
             <Chat />
           </Col>
         </Row>
