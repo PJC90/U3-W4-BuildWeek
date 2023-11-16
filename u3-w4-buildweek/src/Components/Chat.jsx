@@ -49,7 +49,7 @@ const Chat = function () {
     return (
         <Container>
             <Row>
-                <Col className='position-fixed bottom-0 end-0' md={5} lg={4} xl={3}>
+                <Col className='position-fixed bottom-0 end-0' md={5} lg={4} xl={2}>
                     <ListGroup >
                         <ListGroup.Item className='d-flex justify-content-between align-items-center' style={{backgroundColor: '#0e76a8', color: 'white'}}>
                             <div className='d-flex align-items-center'>
@@ -85,7 +85,7 @@ const Chat = function () {
                                             }}/>
                                         </Form.Group>
                                     </Form>
-                                    <Container style={{maxHeight: 400, overflow: 'auto'}}>
+                                    <Container style={{maxHeight: 700, overflow: 'auto'}}>
                                         {users
                                         .filter((utente) => utente.name.toLowerCase().includes(searchUser.toLowerCase()))
                                         .map((utente) => {
