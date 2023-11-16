@@ -28,7 +28,7 @@ export const fetchUser = () => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log("dati ricevuti", data);
+      // console.log("dati ricevuti", data);
       dispatch(fetchUserSuccess(data));
     } else {
       throw new Error("errore recupero dati");

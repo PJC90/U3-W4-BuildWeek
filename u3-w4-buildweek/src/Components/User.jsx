@@ -1,19 +1,36 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Dropdown, Row } from "react-bootstrap";
 import {
+  Arrow90degRight,
   Bell,
   BellFill,
   Check2,
+  Download,
+  InfoSquareFill,
+  PencilFill,
+  PersonPlusFill,
   PlusLg,
   VolumeUpFill
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../Redux/actions/fetchUser";
+import UserModal from "./UserModal";
 
 const User = function () {
   const [isClicked, setIsClicked] = useState(false);
   const [showTolltip, setShowTolltip] = useState(false);
   const [seguiButton, setSeguiButton] = useState(false);
+  const [showModal, setShowModal] = useState(false)
+  const [profileData, setProfileData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    username: "",
+    bio: "",
+    title: "",
+    area: "",
+    image: ""
+  })
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
@@ -26,6 +43,32 @@ const User = function () {
   const handleMouseLeave = () => {
     setShowTolltip(false);
   };
+  const handleEditClick = () => {setShowModal(true)}
+
+  const handleSaveChanges = async () => {
+    try {
+      
+      let response = await fetch('https://striveschool-api.herokuapp.com/api/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMjc5MWM1NWU3ZTAwMThmODNjNDciLCJpYXQiOjE2OTk4ODI4OTcsImV4cCI6MTcwMTA5MjQ5N30.kOr7iDAngb-ynvpkBFXSJFA4dTCuVin-ZGRTDWNQLGk',
+        },
+        body: JSON.stringify(profileData),
+      });
+
+      if (response.ok) {
+        dispatch(fetchUser())
+      } else {
+        throw new Error('Errore durante la modifica dei dati del profilo');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    setShowModal(false)
+  }
+
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.userData);
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -34,17 +77,14 @@ const User = function () {
   );
 
   useEffect(() => {
-    console.log("Fetch");
     dispatch(fetchUser());
   }, []);
 
   if (!userData) {
     // Se userData è ancora undefined
-    console.log("loading");
     return <div>Loading...</div>;
   }
-  console.log(userData);
-  console.log("ciao");
+  
   return (
     <>
       {userData && !isLoading && (
@@ -60,6 +100,7 @@ const User = function () {
               alt="image-profile"
               style={{
                 width: "150px",
+                height:"150px",
                 position: "absolute",
                 top: "0%",
                 left: "3%",
@@ -106,7 +147,7 @@ const User = function () {
             <Row>
               <Col>
                 <div className="d-flex align-items-end">
-                  <Card.Title className="ms-0 mb-0 fs-3">
+                  <Card.Title className="ms-0 mb-0 fs-4">
                     {userData.name} {userData.surname}{" "}
                   </Card.Title>
                   <p className="text-secondary ms-2 mb-0">
@@ -114,7 +155,6 @@ const User = function () {
                   </p>
                 </div>
                 <div className="ms-1 mt-1">
-                  <Card.Text className="mb-0">{userData.title}</Card.Text>
                   <Card.Text className="mb-0">{userData.title}</Card.Text>
                   <Card.Text className="text-secondary mt-2 mb-0">
                     {userData.area}
@@ -132,7 +172,7 @@ const User = function () {
                     variant={
                       seguiButton ? "outline-secondary" : "outline-primary"
                     }
-                    className="rounded-pill ms-2 d-none d-md-inline-block"
+                    className="rounded-pill ms-2"
                     onClick={handleSeguiButton}
                   >
                     {seguiButton ? (
@@ -142,18 +182,27 @@ const User = function () {
                     )}
                     {seguiButton ? "Già segui" : "Segui"}
                   </Button>
-                  <Button
-                    variant="outline-secondary"
-                    className="rounded-pill ms-2 d-none d-md-inline-block"
-                  >
-                    Altro
-                  </Button>
-                  <Button
-                    variant="outline-secondary"
-                    className="rounded-pill ms-2 d-md-none"
-                  >
-                    •••
-                  </Button>
+                  <style>{`.dropdown-toggle::after {display: none; }`}</style>
+                  <Dropdown className=" ms-2 d-inline-block" >
+                    <Dropdown.Toggle variant="outline-secondary" className="rounded-pill"  >
+                      <span className="d-none d-sm-inline-block">Altro</span>
+                      <span className="d-sm-none">•••</span>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item href=""><Arrow90degRight className="me-3"/>Invia il profilo in un messaggio</Dropdown.Item>
+                      <Dropdown.Item href=""><Download className="me-3"/>Salva come PDF</Dropdown.Item>
+                      <Dropdown.Item href=""><PersonPlusFill className="me-3"/>Collegati</Dropdown.Item>
+                      <Dropdown.Item href=""><InfoSquareFill className="me-3"/>Informazioni su questo profilo</Dropdown.Item>
+                      <Dropdown.Item href="" onClick={handleEditClick}><PencilFill className="me-3"/>Modifica</Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                  <UserModal
+                  show={showModal}
+                  handleClose={() => setShowModal(false)}
+                  handleSaveChanges={handleSaveChanges}
+                  profileData={profileData}
+                  setProfileData={setProfileData}
+                  />
                 </div>
               </Col>
               <Col className="d-none d-lg-block" lg={4}>

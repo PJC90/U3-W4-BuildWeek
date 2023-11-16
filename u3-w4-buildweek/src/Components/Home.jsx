@@ -6,6 +6,9 @@ import { getAllPosts } from "../Redux/actions/posts";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 import { getAllProfiles, getMyProfile } from "../Redux/actions";
+import RightSideBar from "./RightSideBarHome";
+import LeftSidebar from "./LeftSideHome";
+import EventiConsigliati from "./EventiConsigliati";
 
 const Home = function () {
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -25,14 +28,19 @@ const Home = function () {
   return (
     <Container>
       <Row className="">
-        <Col lg={3}>left-sidebar</Col>
+        <Col lg={2}>
+          <LeftSidebar />
+        </Col>
         <Col lg={6}>
           <CreatePost />
           {!isLoading
             ? allPosts.map((post) => <Post key={post._id} post={post} />)
             : null}
+          <EventiConsigliati />
         </Col>
-        <Col lg={3}>right-sidebar</Col>
+        <Col lg={3} style={{ marginTop: "1rem" }}>
+          <RightSideBar />
+        </Col>
       </Row>
     </Container>
   );
