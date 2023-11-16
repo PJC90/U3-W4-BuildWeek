@@ -6,6 +6,7 @@ import { getAllPosts } from "../Redux/actions/posts";
 import Post from "./Post";
 import RightSideBar from "./RightSideBarHome";
 import LeftSidebar from "./LeftSideHome";
+import EventiConsigliati from "./EventiConsigliati";
 
 const Home = function () {
   const isLoading = useSelector((state) => state.loading.isLoading);
@@ -24,6 +25,7 @@ const Home = function () {
           {!isLoading
             ? allPosts.map((post) => <Post key={post._id} post={post} />)
             : null}
+            <EventiConsigliati/>
         </Col>
         <Col lg={3} style={{marginTop: '1rem'}}>
           <RightSideBar />
