@@ -23,3 +23,10 @@ p {
     height: 0;
   }
 }
+#navbarScrollingDropdown{
+padding: 0;
+}
+
+#nav-dropdown-dark-example{
+  padding: 0;
+}

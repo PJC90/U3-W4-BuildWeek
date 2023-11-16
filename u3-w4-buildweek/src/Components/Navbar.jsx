@@ -18,24 +18,28 @@ import Avatar from "../Static Img/Avatar.webp";
 function LinkedinNav() {
     return (
       <Navbar sticky="top" expand="lg" className="pt-1 pb-1 mb-3" style={{fontSize:'12px',backgroundColor:'white'}}>
-        <Container fluid className="ms-5">
+        <Container >
+          <Row className="w-100">
+            <Col className="d-flex align-items-center">
           <Navbar.Brand className="ms-3"><img
                     src={Logo}
                     alt="logo"
-                    style={{ width: "30px", height: "30px" }}
-                    className="ms-4 "
-                  /></Navbar.Brand>
-                   <Form className="d-flex">
+                    style={{ width: "30px", height: "30px" }}/>
+          </Navbar.Brand>
+         <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2 bg-light"
+                className="me-2 bg-light d-none d-xl-inline-block"
                 aria-label="Search"
-                style={{width:'300px',height:'30px'}}
+                style={{width:'200px',height:'32px'}}
               />
-            </Form>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll">
+         </Form>
+            </Col>
+            
+            <Col >
+        
+          <Navbar.Collapse id="navbarScroll" >
             <Nav
               className="me-auto my-2 my-lg-0 ms-5 ps-4"
               style={{ maxHeight: '100px' }}
@@ -48,9 +52,9 @@ function LinkedinNav() {
               <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><ChatLeftDotsFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Messaggistica</Nav.Link></Nav.Link>
               <Nav.Link href="#action1" className="d-flex flex-column align-items-center"><BellFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Notifiche</Nav.Link></Nav.Link>
               
-              <div className="d-flex flex-column align-items-center">
+              <div className="d-flex flex-column justify-content-center me-4 ms-2">
                 <img src={Avatar} style={{width:'20px',height:'20px'}} alt="profile"></img>
-                <NavDropdown title="Tu" className="pt-0" id="navbarScrollingDropdown" >
+                <NavDropdown title="Tu" className="" id="navbarScrollingDropdown">
                 
               <NavDropdown.Item href="#" className="pt-0">
                           <Row>
@@ -69,7 +73,7 @@ function LinkedinNav() {
                           </Button>
                         </NavDropdown.Item>
 
-              <NavDropdown.Item href="#">
+              <NavDropdown.Item href="#" >
                           <ul>
                             <strong>Account</strong>
                           </ul>
@@ -112,21 +116,21 @@ function LinkedinNav() {
                         </NavDropdown.Item>
                       </NavDropdown></div>      
             </Nav>
-            <Nav >
-               <div className="d-flex flex-column align-items-center">
-                        <Grid3x3GapFill style={{width:'20px',height:'20px'}}/>
-                        <NavDropdown
-              id="nav-dropdown-dark-example"
-              title="Per le Aziende"
-              menuVariant="dark" >
-            </NavDropdown> 
-            </div>
-            <Nav.Link href="/home" className="me-4 pe-4" style={{ textAlign: "center",color:'darkgoldenrod' }}><u>
-                    Prova Premium per <br />0 EUR</u>
-                  </Nav.Link>
+            <Nav className="d-flex border-start" >
+                       <div className="d-flex flex-column align-items-center justify-content-center ms-4">
+                              <Grid3x3GapFill style={{width:'20px',height:'20px'}}/>                       
+                              <NavDropdown id="nav-dropdown-dark-example" title="Per le Aziende" menuVariant="dark" >
+                              </NavDropdown> 
+                         </div>
+           
+                            <Nav.Link href="/home" style={{ textAlign: "center",color:'darkgoldenrod', width:"170px" }}><u>
+                              Riattiva Premium con il <br />50% di sconto</u>
+                            </Nav.Link>
             </Nav>
            
           </Navbar.Collapse>
+            </Col>
+          </Row>
         </Container>
       </Navbar>
     );
