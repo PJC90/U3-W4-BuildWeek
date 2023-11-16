@@ -12,9 +12,8 @@ import { BriefcaseFill } from "react-bootstrap-icons";
 import { ChatLeftDotsFill } from "react-bootstrap-icons";
 import { BellFill } from "react-bootstrap-icons";
 import { Grid3x3GapFill } from "react-bootstrap-icons";
-import { Search } from "react-bootstrap-icons";
 import Avatar from "../Static Img/Avatar.webp";
-import Aziende from "./Aziende";
+
 
 function LinkedinNav() {
     return (
