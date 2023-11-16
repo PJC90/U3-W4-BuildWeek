@@ -38,10 +38,20 @@ const LeftSidebar = () => {
   return (
     <>
       <div className='bg-white rounded border'>
-        <div>
+        <div style={{ position: "relative" }}>
           <img src={SfondoProfilo} alt="" style={{height:'3em', width:'100%'}} className="img-fluid"/>
           <div className='d-flex justify-content-center'>
-          {profileData && <img src={profileData.image || ''} alt="immagineprofilo" className='border border-white' style={{width : '4em', borderRadius : '40px'}} />} 
+          {profileData && 
+          <img src={profileData.image || ''} 
+          alt="immagineprofilo" 
+          className='border border-white' 
+          style={{width : '4em',
+                position: "absolute",
+                top: "110%",
+                left: "35%",
+                transform: "translateY( -70%)",
+                borderRadius: "50%",
+                border: "5px solid white"}} />} 
           </div>
         </div>
         <div className='text-center mt-4'>

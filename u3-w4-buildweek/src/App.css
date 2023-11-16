@@ -23,14 +23,10 @@ p {
     height: 0;
   }
 }
-
-/* stili bottoni */
-.create-post-btn {
-  background-color: transparent !important;
+#navbarScrollingDropdown{
+padding: 0;
 }
 
-/* textarea */
-textarea:hover {
-  box-shadow: none !important;
-  border: none !important;
+#nav-dropdown-dark-example{
+  padding: 0;
 }
