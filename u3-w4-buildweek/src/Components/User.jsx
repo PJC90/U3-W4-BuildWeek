@@ -77,13 +77,11 @@ const User = function () {
   );
 
   useEffect(() => {
-    console.log("Fetch");
     dispatch(fetchUser());
   }, []);
 
   if (!userData) {
     // Se userData è ancora undefined
-    console.log("loading");
     return <div>Loading...</div>;
   }
   

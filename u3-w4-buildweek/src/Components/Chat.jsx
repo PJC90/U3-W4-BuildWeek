@@ -34,7 +34,7 @@ const Chat = function () {
             }
         })
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             setUsers(data);
         })
         .catch((err) => {
