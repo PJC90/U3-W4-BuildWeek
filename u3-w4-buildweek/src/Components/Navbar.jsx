@@ -21,114 +21,108 @@ function LinkedinNav() {
         <Container >
           <Row className="w-100">
             <Col className="d-flex align-items-center">
-          <Navbar.Brand className="ms-3"><img
-                    src={Logo}
-                    alt="logo"
-                    style={{ width: "30px", height: "30px" }}/>
-          </Navbar.Brand>
-         <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2 bg-light d-none d-xl-inline-block"
-                aria-label="Search"
-                style={{width:'200px',height:'32px'}}
-              />
-         </Form>
+                        <Navbar.Brand className="ms-3"><img
+                                  src={Logo}
+                                  alt="logo"
+                                  style={{ width: "30px", height: "30px" }}/>
+                        </Navbar.Brand>
+                      <Form className="d-flex">
+                            <Form.Control
+                              type="search"
+                              placeholder="Search"
+                              className="me-2 bg-light d-none d-xl-inline-block"
+                              aria-label="Search"
+                              style={{width:'200px',height:'32px'}}
+                            />
+                      </Form>
             </Col>
             
             <Col >
-        
-          <Navbar.Collapse id="navbarScroll" >
-            <Nav
-              className="me-auto my-2 my-lg-0 ms-5 ps-4"
-              style={{ maxHeight: '100px' }}
-              navbarScroll
-              
-            >
-              <Nav.Link href="#action1" className="d-flex flex-column align-items-center ms-3"><HouseDoorFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Home</Nav.Link></Nav.Link>
-              <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><PeopleFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Rete</Nav.Link></Nav.Link>
-              <Nav.Link href="#action1" className="d-flex flex-column align-items-center"><BriefcaseFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Lavoro</Nav.Link></Nav.Link>
-              <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><ChatLeftDotsFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Messaggistica</Nav.Link></Nav.Link>
-              <Nav.Link href="#action1" className="d-flex flex-column align-items-center"><BellFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Notifiche</Nav.Link></Nav.Link>
-              
-              <div className="d-flex flex-column justify-content-center me-4 ms-2">
-                <img src={Avatar} style={{width:'20px',height:'20px'}} alt="profile"></img>
-                <NavDropdown title="Tu" className="" id="navbarScrollingDropdown">
-                
-              <NavDropdown.Item href="#" className="pt-0">
-                          <Row>
-                            <Col>
-                              <img src={Avatar} alt="profilo" style={{width:'80px',height:'80px'}}/>
-                            </Col>
-                            <Col>
-                              <div>
-                                <h4>Nome</h4>
-                                <p>Descrizione</p>
-                              </div>
-                            </Col>
-                          </Row>
-                          <Button variant="outline-primary">
-                            Visualizza il profilo
-                          </Button>
-                        </NavDropdown.Item>
+                      <Navbar.Collapse id="navbarScroll" >
+                        <Nav className="me-auto my-2 my-lg-0 ms-5 ps-4" style={{ maxHeight: '100px' }}>
+                          <Nav.Link href="#action1" className="d-flex flex-column align-items-center ms-3"><HouseDoorFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Home</Nav.Link></Nav.Link>
+                          <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><PeopleFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Rete</Nav.Link></Nav.Link>
+                          <Nav.Link href="#action1" className="d-flex flex-column align-items-center"><BriefcaseFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Lavoro</Nav.Link></Nav.Link>
+                          <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><ChatLeftDotsFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Messaggistica</Nav.Link></Nav.Link>
+                          <Nav.Link href="#action1" className="d-flex flex-column align-items-center"><BellFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Notifiche</Nav.Link></Nav.Link>
+                          
+                          <div className="d-flex flex-column justify-content-center me-4 ms-2">
+                            <img src={Avatar} style={{width:'20px',height:'20px'}} alt="profile"></img>
+                            <NavDropdown title="Tu" className="" id="navbarScrollingDropdown">
+                            
+                          <NavDropdown.Item href="#" className="pt-0">
+                                      <Row>
+                                        <Col>
+                                          <img src={Avatar} alt="profilo" style={{width:'80px',height:'80px'}}/>
+                                        </Col>
+                                        <Col>
+                                          <div>
+                                            <h4>Nome</h4>
+                                            <p>Descrizione</p>
+                                          </div>
+                                        </Col>
+                                      </Row>
+                                      <Button variant="outline-primary">
+                                        Visualizza il profilo
+                                      </Button>
+                                    </NavDropdown.Item>
 
-              <NavDropdown.Item href="#" >
-                          <ul>
-                            <strong>Account</strong>
-                          </ul>
-                          <li>
-                            <i></i>Prova Premium per 0 EUR
-                          </li>
-                          <li>
-                            <Nav.Link href="/home">
-                              Impostazioni e privacy
-                            </Nav.Link>
-                          </li>
-                          <li>
-                            <Nav.Link href="/home">Guida</Nav.Link>
-                          </li>
-                          <li>
-                            {" "}
-                            <Nav.Link href="/home">Lingua</Nav.Link>
-                          </li>
-                        </NavDropdown.Item>
+                          <NavDropdown.Item href="#" >
+                                      <ul>
+                                        <strong>Account</strong>
+                                      </ul>
+                                      <li>
+                                        <i></i>Prova Premium per 0 EUR
+                                      </li>
+                                      <li>
+                                        <Nav.Link href="/home">
+                                          Impostazioni e privacy
+                                        </Nav.Link>
+                                      </li>
+                                      <li>
+                                        <Nav.Link href="/home">Guida</Nav.Link>
+                                      </li>
+                                      <li>
+                                        {" "}
+                                        <Nav.Link href="/home">Lingua</Nav.Link>
+                                      </li>
+                                    </NavDropdown.Item>
 
-                        <NavDropdown.Divider />
+                                    <NavDropdown.Divider />
 
-                        <NavDropdown.Item href="#">
-                          <ul>
-                            <strong>Gestisci</strong>
-                          </ul>
-                          <li>
-                            <Nav.Link href="/home">Post e attività</Nav.Link>
-                          </li>
-                          <li>
-                            <Nav.Link href="/home">
-                              Account per la pubblicazione di offerte
-                            </Nav.Link>
-                          </li>
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#">
-                          {" "}
-                          <Nav.Link href="/home">Esci</Nav.Link>
-                        </NavDropdown.Item>
-                      </NavDropdown></div>      
-            </Nav>
-            <Nav className="d-flex border-start" >
-                       <div className="d-flex flex-column align-items-center justify-content-center ms-4">
-                              <Grid3x3GapFill style={{width:'20px',height:'20px'}}/>                       
-                              <NavDropdown id="nav-dropdown-dark-example" title="Per le Aziende" menuVariant="dark" >
-                              </NavDropdown> 
-                         </div>
-           
-                            <Nav.Link href="/home" style={{ textAlign: "center",color:'darkgoldenrod', width:"170px" }}><u>
-                              Riattiva Premium con il <br />50% di sconto</u>
-                            </Nav.Link>
-            </Nav>
-           
-          </Navbar.Collapse>
+                                    <NavDropdown.Item href="#">
+                                      <ul>
+                                        <strong>Gestisci</strong>
+                                      </ul>
+                                      <li>
+                                        <Nav.Link href="/home">Post e attività</Nav.Link>
+                                      </li>
+                                      <li>
+                                        <Nav.Link href="/home">
+                                          Account per la pubblicazione di offerte
+                                        </Nav.Link>
+                                      </li>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="#">
+                                      {" "}
+                                      <Nav.Link href="/home">Esci</Nav.Link>
+                                    </NavDropdown.Item>
+                                  </NavDropdown></div>      
+                        </Nav>
+                        <Nav className="d-flex border-start" >
+                                  <div className="d-flex flex-column align-items-center justify-content-center ms-4">
+                                          <Grid3x3GapFill style={{width:'20px',height:'20px'}}/>                       
+                                          <NavDropdown id="nav-dropdown-dark-example" title="Per le Aziende" menuVariant="dark" >
+                                          </NavDropdown> 
+                                    </div>
+                      
+                                        <Nav.Link href="/home" style={{ textAlign: "center",color:'darkgoldenrod', width:"170px" }}><u>
+                                          Riattiva Premium con il <br />50% di sconto</u>
+                                        </Nav.Link>
+                        </Nav>
+                      
+                      </Navbar.Collapse>
             </Col>
           </Row>
         </Container>
