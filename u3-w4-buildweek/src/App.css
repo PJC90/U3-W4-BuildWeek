@@ -23,3 +23,14 @@ p {
     height: 0;
   }
 }
+
+/* stili bottoni */
+.create-post-btn {
+  background-color: transparent !important;
+}
+
+/* textarea */
+textarea:hover {
+  box-shadow: none !important;
+  border: none !important;
+}

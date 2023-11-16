@@ -24,10 +24,10 @@ export const resetTest = () => ({
   type: ActionTypes.RESET_TEST
 });
 
-export const getAllProfiles = async function () {
+export const getAllProfiles = () => async (dispatch) => {
   const URL = "https://striveschool-api.herokuapp.com/api/profile/";
   const TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMTIyYmM1NWU3ZTAwMThmODNjMmMiLCJpYXQiOjE2OTk4Nzc0MjAsImV4cCI6MTcwMTA4NzAyMH0.JG_-fSGNS6Nx93aTlTA4CRSooBPOeQWjXe3RhVa-Ls8";
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMTIyYmM1NWU3ZTAwMThmODNjMmMiLCJpYXQiOjE2OTk4Nzk2NzQsImV4cCI6MTcwMTA4OTI3NH0.usy-4B4WgD-20ezReYqhjPpRfsfl1phLJRdEt-o73GM";
   try {
     const response = await fetch(URL, {
       headers: {
@@ -36,7 +36,7 @@ export const getAllProfiles = async function () {
     });
     if (response.ok) {
       const data = await response.json();
-      setAllProfiles(data);
+      dispatch(setAllProfiles(data));
     } else {
       throw new Error("Network error.");
     }

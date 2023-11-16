@@ -52,6 +52,7 @@ export const fetchUserByID = (userId) => async (dispatch) => {
       const data = await response.json();
       console.log("dati ricevuti", data);
       dispatch(fetchUserByIdSuccess(data));
+      return data;
     } else {
       throw new Error("errore recupero dati");
     }

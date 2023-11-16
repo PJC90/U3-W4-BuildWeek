@@ -1,5 +1,6 @@
 export const SET_ALL_POSTS = "SET_ALL_POSTS";
 export const SET_POST = "SET_POST";
+export const SET_FETCHED_USERS = "SET_FETCHED_USERS";
 
 export const setAllPosts = (posts) => ({
   type: SET_ALL_POSTS,
@@ -9,6 +10,11 @@ export const setAllPosts = (posts) => ({
 export const setPost = (post) => ({
   type: SET_POST,
   payload: post
+});
+
+export const setFetchedUsers = (id) => ({
+  type: SET_FETCHED_USERS,
+  payload: id
 });
 
 export const getAllPosts = () => async (dispatch) => {
