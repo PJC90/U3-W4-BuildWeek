@@ -7,7 +7,6 @@ import { useEffect } from "react";
 const JobsSearch = function () {
     const isLoading = useSelector((state) => state.loading.isLoading);
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(setLoading(false));
     }, []);
