@@ -26,7 +26,7 @@ const Sidebar = function () {
         return response.json();
       })
       .then(data => {
-        console.log(data)
+        // console.log(data)
         setProfileData(data.slice(0, 10)); 
       })
       .catch(error => {
