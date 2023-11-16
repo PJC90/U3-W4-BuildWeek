@@ -12,3 +12,39 @@
   background-color: rgb(223, 223, 223) !important;
   border: 1.8px solid black !important;
 }
+
+.nomecognome:hover {
+  cursor: pointer;
+  text-decoration: underline !important;
+}
+
+.sez1:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sez2:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sez3:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.elem1:hover {
+  cursor: pointer;
+  text-decoration: underline !important;
+}
+
+.sez4:hover {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.elem2:hover {
+  background-color: lightgray;
+  border-radius: 30px;
+  cursor: pointer;
+}

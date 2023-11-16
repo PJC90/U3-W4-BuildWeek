@@ -1,9 +1,9 @@
-import Sole24 from '../SidebarImgs/sole24ore.png'
+import Sole24 from '../SidebarImgs/sole24ore.png';
 import Pubblicità from '../SidebarImgs/pubblicità.png';
 import CercoLavoro from '../SidebarImgs/cercolavoro.png';
 import { useEffect, useState } from 'react';
 import { SendFill, PersonPlusFill, Plus} from 'react-bootstrap-icons';
-import '../Sidebar.css'
+import '../Sidebar.css';
 import { Link } from 'react-router-dom';
 
 
@@ -16,7 +16,7 @@ const Sidebar = function () {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMjk2MGM1NWU3ZTAwMThmODNjNWEiLCJpYXQiOjE2OTk4ODMzNjAsImV4cCI6MTcwMTA5Mjk2MH0.pq7YydePhZQPZHlncuZcOABkR3_X_Lma7N_cam5LwTQ',
+          'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMTIyYmM1NWU3ZTAwMThmODNjMmMiLCJpYXQiOjE2OTk4Nzk2NzQsImV4cCI6MTcwMTA4OTI3NH0.usy-4B4WgD-20ezReYqhjPpRfsfl1phLJRdEt-o73GM",
         },
       })
       .then(response => {
