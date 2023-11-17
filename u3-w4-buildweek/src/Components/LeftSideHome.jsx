@@ -45,7 +45,7 @@ const LeftSidebar = () => {
           <img src={profileData.image || ''} 
           alt="immagineprofilo" 
           className='border border-white' 
-          style={{width : '4em',
+          style={{width : '4em', height:"4em",
                 position: "absolute",
                 top: "110%",
                 left: "35%",
@@ -58,7 +58,8 @@ const LeftSidebar = () => {
           {profileData && (
             <>
               <Link to="/me" className='text-decoration-none text-black fw-bold nomecognome'>{profileData.name} {profileData.surname}</Link>
-              <p className='mt-1 text-secondary' style={{fontSize : '0.8em'}}>{profileData.title}; {profileData.bio}</p>
+              <p className='mt-1 mb-0 text-secondary' style={{fontSize : '0.8em'}}>{profileData.title}</p>
+              <p className='mt-0 text-secondary' style={{fontSize : '0.8em'}}>{profileData.bio}</p>
             </>
           )}
         </div>
