@@ -36,7 +36,7 @@ const Comment = ({ comment }) => {
           <div className="d-flex justify-content-between">
             <span className="fw-semibold">
               {comment.author.split("@")[0].charAt(0).toUpperCase() +
-                comment.author.slice(1)}
+                comment.author.split("@")[0].slice(1)}
             </span>
             <small>5 Giorni</small>
           </div>

@@ -32,6 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFetchedUsers } from "../Redux/actions/posts";
 import { fetchUserByID } from "../Redux/actions/fetchUser";
 import Comment from "./Comment";
+import CreateComments from "./CreateComments";
 
 const Post = ({ post }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -105,20 +106,20 @@ const Post = ({ post }) => {
       if (foundUser) {
         // userProfile.current = foundUser;
         setUserProfile(foundUser);
-        console.log(foundUser);
-        console.info(
-          "FOUNDUSER TRUE: ",
-          Object.values(foundUser)[0],
-          post.user._id,
-          post.user.username,
-          post
-        );
+        // console.log(foundUser);
+        // console.info(
+        //   "FOUNDUSER TRUE: ",
+        //   Object.values(foundUser)[0],
+        //   post.user._id,
+        //   post.user.username,
+        //   post
+        // );
         setIsPostValid(true);
       } else {
         console.log("FOUNDUSER FALSE: ", post._id, post);
         setIsPostValid(false);
       }
-      console.log("POSTUSERID: ", post.user._id);
+      // console.log("POSTUSERID: ", post.user._id);
     }
     // const fetchUserByID = async (userId) => {
     //   if (!fetchedUsers.includes(post.user._id)) {
@@ -146,7 +147,7 @@ const Post = ({ post }) => {
     //   }
     // };
     // fetchUserByID(post.user._id);
-  }, [allProfiles, userProfile]);
+  }, [allProfiles, userProfile, comments]);
 
   const handleExpand = () => {
     setExpandComments(!expandComments);
@@ -258,42 +259,57 @@ const Post = ({ post }) => {
                 <Cursor /> Invia
               </Button>
             </ButtonGroup>
-            <div className="d-flex flex-column gap-3 my-3">
-              {postComments && !expandComments ? (
+            {postComments ? (
+              postComments.length ? (
                 <>
-                  {postComments.length > 2 ? (
-                    <>
-                      {postComments.slice(0, 2).map((comment) => (
-                        <>
-                          <Comment comment={comment} />
-                        </>
-                      ))}
-                      <span className="text-primary" onClick={handleExpand}>
-                        Carica altri commenti
-                      </span>
-                    </>
-                  ) : (
-                    postComments.map((comment) => (
+                  <CreateComments postId={post._id} />
+                  <div className="d-flex flex-column gap-3 my-3">
+                    {!expandComments ? (
                       <>
-                        <Comment comment={comment} />
+                        {postComments.length > 2 ? (
+                          <>
+                            {postComments.slice(0, 2).map((comment) => (
+                              <>
+                                <Comment comment={comment} />
+                              </>
+                            ))}
+                            <span
+                              className="text-primary"
+                              onClick={handleExpand}
+                              role="button"
+                            >
+                              Carica altri commenti
+                            </span>
+                          </>
+                        ) : (
+                          postComments.map((comment) => (
+                            <>
+                              <Comment comment={comment} />
+                            </>
+                          ))
+                        )}
                       </>
-                    ))
-                  )}
+                    ) : (
+                      <>
+                        {" "}
+                        {postComments.map((comment) => (
+                          <>
+                            <Comment comment={comment} />
+                          </>
+                        ))}
+                        <span
+                          className="text-primary"
+                          onClick={handleExpand}
+                          role="button"
+                        >
+                          Nascondi commenti
+                        </span>
+                      </>
+                    )}
+                  </div>
                 </>
-              ) : (
-                <>
-                  {" "}
-                  {postComments.map((comment) => (
-                    <>
-                      <Comment comment={comment} />
-                    </>
-                  ))}
-                  <span className="text-primary" onClick={handleExpand}>
-                    Nascondi commenti
-                  </span>
-                </>
-              )}
-            </div>
+              ) : null
+            ) : null}
           </Card.Footer>
         </Card>
       ) : null}

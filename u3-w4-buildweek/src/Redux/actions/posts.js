@@ -55,6 +55,7 @@ export const getAllComments = () => async (dispatch) => {
       const data = await response.json();
       dispatch(setPostsComments(data));
       console.log("all comments: ", data);
+      return data;
     } else {
       throw new Error("Network error.");
     }
@@ -62,3 +63,30 @@ export const getAllComments = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const postComment =
+  (commentText, rate, elementId) => async (dispatch) => {
+    const objToUse = { comment: commentText, rate: rate, elementId: elementId };
+    const ENDPOINT = "https://striveschool-api.herokuapp.com/api/comments/";
+    const TOKEN =
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjljNWY2ZTNkZDAwMTQ5NWU0NjUiLCJpYXQiOjE3MDAxNzQ2MTcsImV4cCI6MTcwMTM4NDIxN30.UMJlveT86fx5Rkmzys9zpnk8qI_p5E5eY344E9z6wgM ";
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {
+          Authorization: TOKEN,
+          "Content-type": "application/json; charset=UTF-8"
+        },
+        body: JSON.stringify(objToUse)
+      });
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(getAllComments());
+        console.log("comment: ", data);
+      } else {
+        throw new Error("Network error.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
