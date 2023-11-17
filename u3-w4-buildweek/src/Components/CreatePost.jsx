@@ -16,6 +16,11 @@ const CreatePost = () => {
   const fileInputRef = useRef();
   const [selectedFile, setSelectedFile] = useState(null);
 
+  const isLoading = useSelector((state) => state.loading.isLoading);
+  const personalProfile = useSelector(
+    (state) => state.experiences.personalProfile
+  );
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -90,9 +95,9 @@ const CreatePost = () => {
         >
           <div
             className="bg-secondary rounded-circle text-white d-flex justify-content-center align-items-center"
-            style={{ width: "40px", height: "40px" }}
+            style={{ width: "40px", aspectRatio: "1/1" }}
           >
-            F
+            {!isLoading ? personalProfile.name.split("")[0].toUpperCase() : "!"}
           </div>
         </div>
         <Col className="px-0">

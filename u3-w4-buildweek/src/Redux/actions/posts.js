@@ -1,6 +1,7 @@
 export const SET_ALL_POSTS = "SET_ALL_POSTS";
 export const SET_POST = "SET_POST";
 export const SET_FETCHED_USERS = "SET_FETCHED_USERS";
+export const SET_POSTS_COMMENTS = "SET_POSTS_COMMENTS";
 
 export const setAllPosts = (posts) => ({
   type: SET_ALL_POSTS,
@@ -17,6 +18,11 @@ export const setFetchedUsers = (id) => ({
   payload: id
 });
 
+export const setPostsComments = (comments) => ({
+  type: SET_POSTS_COMMENTS,
+  payload: comments
+});
+
 export const getAllPosts = () => async (dispatch) => {
   const ENDPOINT = "https://striveschool-api.herokuapp.com/api/posts/";
   const TOKEN =
@@ -29,6 +35,26 @@ export const getAllPosts = () => async (dispatch) => {
       const data = await response.json();
       dispatch(setAllPosts(data));
       console.log("all posts: ", data);
+    } else {
+      throw new Error("Network error.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllComments = () => async (dispatch) => {
+  const ENDPOINT = "https://striveschool-api.herokuapp.com/api/comments/";
+  const TOKEN =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjljNWY2ZTNkZDAwMTQ5NWU0NjUiLCJpYXQiOjE3MDAxNzQ2MTcsImV4cCI6MTcwMTM4NDIxN30.UMJlveT86fx5Rkmzys9zpnk8qI_p5E5eY344E9z6wgM ";
+  try {
+    const response = await fetch(ENDPOINT, {
+      headers: { Authorization: TOKEN }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(setPostsComments(data));
+      console.log("all comments: ", data);
     } else {
       throw new Error("Network error.");
     }

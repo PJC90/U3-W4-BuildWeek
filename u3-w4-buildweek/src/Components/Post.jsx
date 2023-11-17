@@ -31,6 +31,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFetchedUsers } from "../Redux/actions/posts";
 import { fetchUserByID } from "../Redux/actions/fetchUser";
+import Comment from "./Comment";
 
 const Post = ({ post }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -40,10 +41,19 @@ const Post = ({ post }) => {
 
   const fetchedUsers = useSelector((state) => state.posts.fetchedUsers);
   const allProfiles = useSelector((state) => state.experiences.allProfiles);
+  const comments = useSelector((state) => state.posts.comments);
+  const [postComments, setPostComments] = useState(null);
+  const [expandComments, setExpandComments] = useState(false);
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const findComments = () => {
+    setPostComments(
+      comments.filter((comment) => comment.elementId === post._id)
+    );
+  };
 
   const formatDistance = (startDate, endDate) => {
     startDate = new Date(startDate);
@@ -88,6 +98,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     if (allProfiles) {
+      findComments();
       const foundUser = allProfiles.find(
         (user) => Object.values(user)[0] === post.user._id
       );
@@ -137,6 +148,10 @@ const Post = ({ post }) => {
     // fetchUserByID(post.user._id);
   }, [allProfiles, userProfile]);
 
+  const handleExpand = () => {
+    setExpandComments(!expandComments);
+  };
+
   return (
     <>
       {isPostValid ? (
@@ -156,7 +171,7 @@ const Post = ({ post }) => {
                   roundedCircle
                   thumbnail
                   width={50}
-                  height={50}
+                  style={{ aspectRatio: "1/1" }}
                   onClick={openProfile}
                 />
               </Col>
@@ -243,6 +258,42 @@ const Post = ({ post }) => {
                 <Cursor /> Invia
               </Button>
             </ButtonGroup>
+            <div className="d-flex flex-column gap-3 my-3">
+              {postComments && !expandComments ? (
+                <>
+                  {postComments.length > 2 ? (
+                    <>
+                      {postComments.slice(0, 2).map((comment) => (
+                        <>
+                          <Comment comment={comment} />
+                        </>
+                      ))}
+                      <span className="text-primary" onClick={handleExpand}>
+                        Carica altri commenti
+                      </span>
+                    </>
+                  ) : (
+                    postComments.map((comment) => (
+                      <>
+                        <Comment comment={comment} />
+                      </>
+                    ))
+                  )}
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {postComments.map((comment) => (
+                    <>
+                      <Comment comment={comment} />
+                    </>
+                  ))}
+                  <span className="text-primary" onClick={handleExpand}>
+                    Nascondi commenti
+                  </span>
+                </>
+              )}
+            </div>
           </Card.Footer>
         </Card>
       ) : null}
