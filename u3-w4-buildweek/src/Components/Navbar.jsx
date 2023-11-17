@@ -17,10 +17,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../Redux/actions/loading";
 import { useEffect } from "react";
 import { fetchUser } from "../Redux/actions/fetchUser";
+import { setSearchValue } from "../Redux/actions/searchActions";
 
 
 function LinkedinNav() {
   const userData = useSelector((state) => state.user.userData);
+  const searchValue = useSelector((state) => state.search.searchValue);
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
@@ -39,6 +41,10 @@ function LinkedinNav() {
     dispatch(setLoading(true))
     navigate("/me")
   }
+  const handleSearchChange = (e) => {
+    const value = e.target.value
+    dispatch(setSearchValue(value))
+  }
     return (
       <Navbar sticky="top" expand="lg" className="pt-1 pb-1 mb-3" style={{fontSize:'12px',backgroundColor:'white'}}>
         <Container >
@@ -49,13 +55,15 @@ function LinkedinNav() {
                                   alt="logo"
                                   style={{ width: "30px", height: "30px" }}/>
                         </Navbar.Brand>
-                      <Form className="d-flex">
+                      <Form className="d-flex" onSubmit={(e)=>e.preventDefault()}>
                             <Form.Control
                               type="search"
                               placeholder="Search"
                               className="me-2 bg-light d-none d-xl-inline-block"
                               aria-label="Search"
                               style={{width:'200px',height:'32px'}}
+                              value={searchValue}
+                              onChange={handleSearchChange}
                             />
                       </Form>
             </Col>
