@@ -7,14 +7,17 @@ import {
   Container,
   Row,
   Col,
-  ButtonGroup
+  ButtonGroup,
+  Dropdown
 } from "react-bootstrap";
 import {
   HandThumbsUp,
   Chat,
   ArrowRepeat,
   Cursor,
-  GlobeAmericas
+  GlobeAmericas,
+  ThreeDots,
+  Trash
 } from "react-bootstrap-icons";
 
 import {
@@ -29,7 +32,7 @@ import {
 
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setFetchedUsers } from "../Redux/actions/posts";
+import { deletePost, setFetchedUsers } from "../Redux/actions/posts";
 import { fetchUserByID } from "../Redux/actions/fetchUser";
 import Comment from "./Comment";
 import CreateComments from "./CreateComments";
@@ -38,10 +41,14 @@ const Post = ({ post }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [userProfile, setUserProfile] = useState(null);
   const [isPostValid, setIsPostValid] = useState(true);
+  const [showCreateComments, setShowCreateComments] = useState(false);
   // const userProfile = useRef();
 
   const fetchedUsers = useSelector((state) => state.posts.fetchedUsers);
   const allProfiles = useSelector((state) => state.experiences.allProfiles);
+  const personalProfile = useSelector(
+    (state) => state.experiences.personalProfile
+  );
   const comments = useSelector((state) => state.posts.comments);
   const [postComments, setPostComments] = useState(null);
   const [expandComments, setExpandComments] = useState(false);
@@ -95,6 +102,10 @@ const Post = ({ post }) => {
 
   const openProfile = () => {
     navigate("/profile/" + post.user._id);
+  };
+
+  const handleShowCreateComment = () => {
+    setShowCreateComments(!showCreateComments);
   };
 
   useEffect(() => {
@@ -157,7 +168,7 @@ const Post = ({ post }) => {
     <>
       {isPostValid ? (
         <Card className="my-3">
-          <Card.Header className="bg-white border-0">
+          <Card.Header className="bg-white border-0 justify-content-between d-flex">
             <Row className="align-items-center">
               <Col xs="auto">
                 <Image
@@ -202,6 +213,24 @@ const Post = ({ post }) => {
               </Col>
               <Col xs="auto"></Col>
             </Row>
+            {post.user._id === personalProfile._id ? (
+              <Dropdown className=" ms-2 d-inline-block">
+                <Dropdown.Toggle variant="" className="rounded-pill border-0">
+                  <ThreeDots />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    href=""
+                    onClick={() => {
+                      dispatch(deletePost(post._id));
+                    }}
+                  >
+                    <Trash className="me-3" />
+                    Elimina post
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : null}
           </Card.Header>
           <Card.Body className="pt-1">
             <Card.Text>
@@ -248,7 +277,11 @@ const Post = ({ post }) => {
                 <HandThumbsUp /> Consiglia{" "}
                 <span className="badge bg-secondary">1,847</span>
               </Button>
-              <Button variant="" className="flex-grow-1">
+              <Button
+                variant=""
+                className="flex-grow-1"
+                onClick={handleShowCreateComment}
+              >
                 <Chat /> Commenta <span className="badge">66</span>
               </Button>
               <Button variant="" className="flex-grow-1">
@@ -308,6 +341,8 @@ const Post = ({ post }) => {
                     )}
                   </div>
                 </>
+              ) : showCreateComments ? (
+                <CreateComments postId={post._id} />
               ) : null
             ) : null}
           </Card.Footer>

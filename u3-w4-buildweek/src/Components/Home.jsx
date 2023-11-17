@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../Redux/actions/loading";
 import {
@@ -18,6 +18,9 @@ const Home = function () {
   const isLoading = useSelector((state) => state.loading.isLoading);
   const allPosts = useSelector((state) => state.posts.allPosts);
   const comments = useSelector((state) => state.posts.comments);
+
+  const [postsShown, setPostsShown] = useState(10);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllPosts()).then(() => {
@@ -46,6 +49,12 @@ const Home = function () {
     }
   }, [isLoading]);
 
+  const togglePostsShown = () => {
+    if (postsShown < allPosts.length) {
+      setPostsShown(postsShown + 4);
+    }
+  };
+
   return (
     <Container>
       <Row className="">
@@ -54,9 +63,20 @@ const Home = function () {
         </Col>
         <Col lg={6}>
           <CreatePost />
-          {!isLoading
-            ? allPosts.map((post) => <Post key={post._id} post={post} />)
-            : null}
+          {!isLoading ? (
+            <>
+              {allPosts.slice(0, postsShown).map((post) => (
+                <Post key={post._id} post={post} />
+              ))}
+              <Button
+                className="mb-3 rounded-pill"
+                variant="primary"
+                onClick={togglePostsShown}
+              >
+                Mostra altri post
+              </Button>
+            </>
+          ) : null}
           <EventiConsigliati />
         </Col>
         <Col lg={3} style={{ marginTop: "1rem" }}>
