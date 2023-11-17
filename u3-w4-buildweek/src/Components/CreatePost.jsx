@@ -23,8 +23,13 @@ const CreatePost = () => {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = (e) => {
+    setShow(true);
+    e.target.blur();
+  };
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -112,6 +117,9 @@ const CreatePost = () => {
               show={show}
               handleClose={handleClose}
               handleSubmit={handleSubmit}
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
+              fileInputRef={fileInputRef}
             />
           </InputGroup>
         </Col>

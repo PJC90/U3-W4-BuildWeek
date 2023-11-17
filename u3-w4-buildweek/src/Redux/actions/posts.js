@@ -109,3 +109,22 @@ export const postComment =
       console.log(error);
     }
   };
+
+// export const deleteComment = ()=> async(dispatch)=>{
+//   const ENDPOINT = `https://striveschool-api.herokuapp.com/api/posts/${postId}`;
+//   const TOKEN =
+//     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMTIyYmM1NWU3ZTAwMThmODNjMmMiLCJpYXQiOjE2OTk4Nzk2NzQsImV4cCI6MTcwMTA4OTI3NH0.usy-4B4WgD-20ezReYqhjPpRfsfl1phLJRdEt-o73GM";
+//   try {
+//     const response = await fetch(ENDPOINT, {
+//       method: "DELETE",
+//       headers: { Authorization: TOKEN }
+//     });
+//     if (response.ok) {
+//       dispatch(getAllPosts());
+//     } else {
+//       throw new Error("Network error.");
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }

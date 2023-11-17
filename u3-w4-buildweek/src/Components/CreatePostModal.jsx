@@ -2,16 +2,35 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Camera, Grid3x3GapFill, Type, ThreeDots } from "react-bootstrap-icons";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { Row, Col, Form } from "react-bootstrap";
 
-function CreatePostModal({ show, handleClose, handleSubmit }) {
+function CreatePostModal({
+  show,
+  handleClose,
+  handleSubmit,
+  selectedFile,
+  setSelectedFile,
+  fileInputRef
+}) {
   const personalProfile = useSelector(
     (state) => state.experiences.personalProfile
   );
   const isLoading = useSelector((state) => state.loading.isLoading);
   const [formInputData, setFormData] = useState({ text: undefined });
+
+  // const fileInputRef = useRef();
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+  };
+
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Body className="border-0">
@@ -47,9 +66,17 @@ function CreatePostModal({ show, handleClose, handleSubmit }) {
               variant="light"
               className="rounded-circle d-flex justify-content-center align-items-center"
               style={{ width: "40px", height: "40px" }}
+              onClick={handleButtonClick}
             >
               <Camera />
             </Button>{" "}
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleFileChange}
+            />
             <Button
               variant="light"
               className="rounded-circle d-flex justify-content-center align-items-center"

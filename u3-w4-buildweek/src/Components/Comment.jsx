@@ -11,6 +11,8 @@ import {
   differenceInSeconds
 } from "date-fns";
 
+import { Trash } from "react-bootstrap-icons";
+
 const Comment = ({ comment }) => {
   const allProfiles = useSelector((state) => state.experiences.allProfiles);
   const [user, setUser] = useState(null);
@@ -80,7 +82,9 @@ const Comment = ({ comment }) => {
               {comment.author.split("@")[0].charAt(0).toUpperCase() +
                 comment.author.split("@")[0].slice(1)}
             </span>
-            <small>{formatDistance(comment.createdAt, new Date())}</small>
+            <small className="d-flex gap-3 align-items-center">
+              {formatDistance(comment.createdAt, new Date())} <Trash />
+            </small>
           </div>
           {comment.comment}
         </Col>
