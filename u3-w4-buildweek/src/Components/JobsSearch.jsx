@@ -6,6 +6,7 @@ import LeftSidebar from "./LeftSideHome";
 import RightSideBar from "./RightSideBarHome";
 import Chat from "./Chat";
 import { Bookmark, BookmarkFill, Linkedin } from "react-bootstrap-icons";
+import JobsSearchQuery from "./JobsSearchQuery";
 
 
 const JobsSearch = function () {
@@ -17,6 +18,8 @@ const JobsSearch = function () {
 
     const [jobs, setJobs] = useState([])
     const [isClicked, setIsClicked] = useState([])
+    const [visibleJobs, setVisibalJobs] = useState(4)
+
     // funzione per cliccare l'icona BookMark su un singolo annuncio
     const handleClick = (id) => {
         setIsClicked((prevIsClicked)=>{
@@ -40,13 +43,15 @@ const JobsSearch = function () {
         }
       };
     
+      const loadMoreJobs = () => {
+        setVisibalJobs((visibleJobs)=> visibleJobs + 3)
+      }
+
       useEffect(() => {
         console.log("use effect!", jobs);
         getJobs();
       }, []);
-    //   console.log("use effect!", jobs);
-
-   const sixJobs = jobs.slice(0,20)
+  
 
 return(
     <>
@@ -63,48 +68,54 @@ return(
                <div className="fw-semibold fs-5 mt-4 ms-3">Consigliato per te:</div>
                <p className="text-secondary ms-3">Sulla base del tuo profilo e della tua cronologia delle ricerche</p>
                  {jobs &&
-                 sixJobs.map((lavori) =>{
+                 jobs.slice(0, visibleJobs).map((lavori) =>{
                     const jobSelected = isClicked.includes(lavori._id)
-                return(
-    <ListGroup.Item>          
-         <div key={lavori._id}>
-            <Row>
-                <Col>
-         <div className="text-right">{lavori.title}</div> 
-            <Card.Link href={lavori.url}>{lavori.company_name}</Card.Link>
-             <div>Location: {lavori.candidate_required_location}</div>
-             <div className="fs-6 text-secondary d-flex align-items-center">
-                <div>Promosso • </div>
-                <Linkedin className="text-primary mx-2"/>
-                <div>Candidatura semplice</div>
-            </div>       
-                </Col>
-                <Col xs={1}>
-                {jobSelected ?
-                    <BookmarkFill className="w-100 fs-4" onClick={()=> handleClick(lavori._id)}/>
-                    :
-                    <Bookmark className="w-100 fs-4" onClick={()=> handleClick(lavori._id)}/>
-                }
-                </Col>
-            </Row>
-                <Accordion defaultActiveKey="0" className="my-3">
-                <Accordion.Item eventKey="1">
-                <Accordion.Header>More Info</Accordion.Header>
-                    <Accordion.Body >
-                     <div><strong>Category:</strong> {lavori.category}</div>
-                         {lavori.job_type && <div><strong>Job Type:</strong> {lavori.job_type}</div>}
-                      <div dangerouslySetInnerHTML={{ __html: lavori.description }}></div>
-                    </Accordion.Body>
-                </Accordion.Item>
-                </Accordion>
-             </div>
-    </ListGroup.Item>
-                )
+                return(<>
+                              <ListGroup.Item>          
+                                  <div key={lavori._id}>
+                                      <Row>
+                                          <Col>
+                                  <div className="text-right">{lavori.title}</div> 
+                                      <Card.Link href={lavori.url}>{lavori.company_name}</Card.Link>
+                                      <div>Location: {lavori.candidate_required_location}</div>
+                                      <div className="fs-6 text-secondary d-flex align-items-center">
+                                          <div>Promosso • </div>
+                                          <Linkedin className="text-primary mx-2"/>
+                                          <div>Candidatura semplice</div>
+                                      </div>       
+                                          </Col>
+                                          <Col xs={1}>
+                                          {jobSelected ?
+                                              <BookmarkFill className="w-100 fs-4" onClick={()=> handleClick(lavori._id)}/>
+                                              :
+                                              <Bookmark className="w-100 fs-4" onClick={()=> handleClick(lavori._id)}/>
+                                          }
+                                          </Col>
+                                      </Row>
+                                          <Accordion defaultActiveKey="0" className="my-3">
+                                          <Accordion.Item eventKey="1">
+                                          <Accordion.Header>More Info</Accordion.Header>
+                                              <Accordion.Body >
+                                              <div><strong>Category:</strong> {lavori.category}</div>
+                                                  {lavori.job_type && <div><strong>Job Type:</strong> {lavori.job_type}</div>}
+                                                <div dangerouslySetInnerHTML={{ __html: lavori.description }}></div>
+                                              </Accordion.Body>
+                                          </Accordion.Item>
+                                          </Accordion>
+                                      </div>
+                              </ListGroup.Item>
+                              
+                              </> )
                })}
                 
                </ListGroup>
+               <div className="text-center my-3">
+                <button className="btn btn-primary" onClick={loadMoreJobs}>
+                    Vedi altro
+                </button>
+               </div>
              </Card>
-               
+             <JobsSearchQuery/>
              </Col>
              <Col lg={3} style={{marginTop: '1rem'}}>
                <RightSideBar />
