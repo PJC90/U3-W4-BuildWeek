@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Container, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import {
+  differenceInWeeks,
+  differenceInMonths,
+  differenceInYears,
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  differenceInSeconds
+} from "date-fns";
 
 const Comment = ({ comment }) => {
   const allProfiles = useSelector((state) => state.experiences.allProfiles);
@@ -17,6 +26,39 @@ const Comment = ({ comment }) => {
     };
     tryGetUser();
   }, [allProfiles]);
+
+  const formatDistance = (startDate, endDate) => {
+    startDate = new Date(startDate);
+    endDate = new Date(endDate);
+    const days = differenceInDays(endDate, startDate);
+    const weeks = differenceInWeeks(endDate, startDate);
+    const months = differenceInMonths(endDate, startDate);
+    const years = differenceInYears(endDate, startDate);
+    // console.log(days, weeks, months, years, endDate, startDate);
+    if (days < 7) {
+      if (days === 0) {
+        const hours = differenceInHours(endDate, startDate);
+        if (hours !== 0) {
+          return `${hours}h`;
+        } else {
+          const minutes = differenceInMinutes(endDate, startDate);
+          if (minutes !== 0) {
+            return `${minutes} minuti`;
+          } else {
+            const seconds = differenceInSeconds(endDate, startDate);
+            return `${seconds} secondi`;
+          }
+        }
+      }
+      return `${days}d`;
+    } else if (weeks >= 1 && weeks <= 3) {
+      return `${weeks}s`;
+    } else if (months >= 1 && months <= 11) {
+      return `${months}m`;
+    } else {
+      return `${years}y`;
+    }
+  };
   return (
     <Container fluid>
       <Row>
@@ -38,7 +80,7 @@ const Comment = ({ comment }) => {
               {comment.author.split("@")[0].charAt(0).toUpperCase() +
                 comment.author.split("@")[0].slice(1)}
             </span>
-            <small>5 Giorni</small>
+            <small>{formatDistance(comment.createdAt, new Date())}</small>
           </div>
           {comment.comment}
         </Col>
