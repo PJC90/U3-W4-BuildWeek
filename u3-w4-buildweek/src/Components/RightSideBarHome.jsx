@@ -59,7 +59,7 @@ const RightSideBar = () => {
                     }
                 </ListGroup>
             </div>
-            <div className="position-sticky top-0">
+            <div className="position-sticky-70">
                 <div>
                     <div className='mt-4'>
                         <img src={Pubblicità} alt="pubblicità" className='rounded border-dark-subtle w-100' />

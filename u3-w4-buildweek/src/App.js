@@ -6,6 +6,8 @@ import OverlayLoading from './Components/OverlayLoading'
 import Navbar from './Components/Navbar'
 import Home from './Components/Home'
 import JobsSearch from './Components/JobsSearch'
+import { Col, Container, Row } from 'react-bootstrap'
+import Chat from "../src/Components/Chat";
 
 function App() {
   return (
@@ -18,6 +20,13 @@ function App() {
         <Route path="/jobs" element={<JobsSearch />} />
         <Route path="/backOffice" element={<BackOffice />} />
       </Routes>
+      <Container fluid>
+        <Row>
+          <Col md={5} lg={4} xl={3} className="ms-auto me-5 d-none d-md-block">          
+            <Chat />
+          </Col>
+        </Row>
+      </Container>
     </BrowserRouter>
   )
 }
