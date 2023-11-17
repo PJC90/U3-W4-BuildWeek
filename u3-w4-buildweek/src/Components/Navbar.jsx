@@ -13,9 +13,12 @@ import { ChatLeftDotsFill } from "react-bootstrap-icons";
 import { BellFill } from "react-bootstrap-icons";
 import { Grid3x3GapFill } from "react-bootstrap-icons";
 import Avatar from "../Static Img/Avatar.webp";
+import { Link, } from "react-router-dom";
 
 
 function LinkedinNav() {
+ 
+  
     return (
       <Navbar sticky="top" expand="lg" className="pt-1 pb-1 mb-3" style={{fontSize:'12px',backgroundColor:'white'}}>
         <Container >
@@ -40,7 +43,7 @@ function LinkedinNav() {
             <Col >
                       <Navbar.Collapse id="navbarScroll" >
                         <Nav className="me-auto my-2 my-lg-0 ms-5 ps-4" style={{ maxHeight: '100px' }}>
-                          <Nav.Link href="#action1" className="d-flex flex-column align-items-center ms-3"><HouseDoorFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Home</Nav.Link></Nav.Link>
+                          <Link to="/"><Nav.Link className="d-flex flex-column align-items-center ms-3"><HouseDoorFill style={{width:'20px',height:'20px'}}/><Nav.Link className="py-0">Home</Nav.Link></Nav.Link></Link>
                           <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><PeopleFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Rete</Nav.Link></Nav.Link>
                           <Nav.Link href="#action1" className="d-flex flex-column align-items-center"><BriefcaseFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Lavoro</Nav.Link></Nav.Link>
                           <Nav.Link href="#action2" className="d-flex flex-column align-items-center"><ChatLeftDotsFill style={{width:'20px',height:'20px'}}/><Nav.Link href="#home" className="py-0">Messaggistica</Nav.Link></Nav.Link>
@@ -62,7 +65,7 @@ function LinkedinNav() {
                                           </div>
                                         </Col>
                                       </Row>
-                                      <Button variant="outline-primary">
+                                      <Button variant="outline-primary" >
                                         Visualizza il profilo
                                       </Button>
                                     </NavDropdown.Item>
