@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Row, Col, Container, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   differenceInWeeks,
   differenceInMonths,
@@ -12,10 +12,13 @@ import {
 } from "date-fns";
 
 import { Trash } from "react-bootstrap-icons";
+import { deleteComment } from "../Redux/actions/posts";
 
 const Comment = ({ comment }) => {
   const allProfiles = useSelector((state) => state.experiences.allProfiles);
   const [user, setUser] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const tryGetUser = () => {
@@ -83,7 +86,11 @@ const Comment = ({ comment }) => {
                 comment.author.split("@")[0].slice(1)}
             </span>
             <small className="d-flex gap-3 align-items-center">
-              {formatDistance(comment.createdAt, new Date())} <Trash />
+              {formatDistance(comment.createdAt, new Date())}{" "}
+              <Trash
+                role="button"
+                onClick={() => dispatch(deleteComment(comment._id))}
+              />
             </small>
           </div>
           {comment.comment}

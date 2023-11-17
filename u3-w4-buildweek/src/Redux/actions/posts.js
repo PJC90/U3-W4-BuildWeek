@@ -110,21 +110,21 @@ export const postComment =
     }
   };
 
-// export const deleteComment = ()=> async(dispatch)=>{
-//   const ENDPOINT = `https://striveschool-api.herokuapp.com/api/posts/${postId}`;
-//   const TOKEN =
-//     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTUyMTIyYmM1NWU3ZTAwMThmODNjMmMiLCJpYXQiOjE2OTk4Nzk2NzQsImV4cCI6MTcwMTA4OTI3NH0.usy-4B4WgD-20ezReYqhjPpRfsfl1phLJRdEt-o73GM";
-//   try {
-//     const response = await fetch(ENDPOINT, {
-//       method: "DELETE",
-//       headers: { Authorization: TOKEN }
-//     });
-//     if (response.ok) {
-//       dispatch(getAllPosts());
-//     } else {
-//       throw new Error("Network error.");
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export const deleteComment = (commentId) => async (dispatch) => {
+  const ENDPOINT = `https://striveschool-api.herokuapp.com/api/comments/${commentId}`;
+  const TOKEN =
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTNhNjljNWY2ZTNkZDAwMTQ5NWU0NjUiLCJpYXQiOjE3MDAxNzQ2MTcsImV4cCI6MTcwMTM4NDIxN30.UMJlveT86fx5Rkmzys9zpnk8qI_p5E5eY344E9z6wgM ";
+  try {
+    const response = await fetch(ENDPOINT, {
+      method: "DELETE",
+      headers: { Authorization: TOKEN }
+    });
+    if (response.ok) {
+      dispatch(getAllComments());
+    } else {
+      throw new Error("Network error.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
